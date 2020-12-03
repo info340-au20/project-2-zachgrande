@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'reactstrap';
 
 function App() {
   // This is the state of the app, where user journal entries are maintained
@@ -9,6 +10,7 @@ function App() {
   // - a mood rating
   // - a song
   const [entries, modifyEntries] = useState();
+
   return (
     <div className="App">
       <h1>Start of project!</h1>
