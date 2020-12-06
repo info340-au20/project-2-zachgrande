@@ -96,14 +96,14 @@ function JournalLog() {
 function EntryLog() {
   //placeholder variables for things in the state
   let mood = "calm";
-  let fetch = "img/sample_album_covers/abbeyroad.jpg";
+  let album = "img/sample_album_covers/abbeyroad.jpg";
   let entryTitle = "Entry Title";
   let date = "date";
   
   return (
     <div className="card mb-4">
-      <div className="card-header color calm">
-        <img className="today album-test" src={fetch} alt="album cover"/>
+      <div className={"card-header color " + mood}>
+        <img className="today album-test" src={album} alt="album cover"/>
         <h2 className="entry-title">{entryTitle}</h2>
         <p className="date">{date}</p>
         <button className="btn btn-secondary">
