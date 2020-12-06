@@ -1,0 +1,310 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    /* background-color: #96ecff; */
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
+}
+
+main {
+    margin: .5rem;
+    padding-bottom: 10px;
+}
+
+
+/*section {
+    margin: auto;
+    width: 50%;
+    border: 3px black;
+    padding: 10px;
+}*/
+
+nav {
+    /* position: fixed; */
+    /* top: 0; */
+    left: 0;
+    width: 100%;
+    background-color: #96e8f7;
+    /*Rebecca changed color slightly from #96ecff*/
+    padding: 0.75rem;
+}
+
+
+/* nav a {
+    color: white;
+    text-decoration: none;
+} */
+
+nav li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    padding-top: .5rem;
+    display: inline-block;
+}
+
+footer {
+    margin: 1rem;
+    opacity: 50%;
+}
+
+.about-us {
+    color: blue;
+}
+
+
+/* search page */
+
+.moodbtn {
+    display: inline-block;
+}
+
+.moodbtn img {
+    /*display: inline-block;*/
+    height: 2rem;
+    width: 2rem;
+}
+
+
+/* calendar page */
+
+button {
+    margin: 0.25rem;
+}
+
+button a {
+    color: white;
+}
+
+button a:hover {
+    color: white;
+}
+
+.calendar {
+    margin: 1rem 1rem;
+    border-radius: 25px;
+    border: 2px solid #7fb8ed;
+    background-color: #7fb8ed;
+}
+
+.calendar h2 {
+    margin-top: 0.7rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.prev,
+.next {
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem;
+}
+
+thead {
+    background-color: #7fb8ed;
+    color: white;
+}
+
+th {
+    text-align: center;
+    font-size: 0.5rem;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    height: 60vw;
+    max-width: 100%;
+    margin-bottom: 2rem;
+    background-color: white;
+}
+
+td {
+    width: 5vw;
+    height: 5vw;
+    vertical-align: top;
+    border: 1px solid #7fb8ed;
+    color: #7fb8ed;
+    font-size: 0.5rem;
+    font-weight: bold;
+}
+
+td:hover {
+    border: 2px solid black;
+}
+
+
+.happy.color {
+    background-color: #fdffab;
+    background-size: cover;
+}
+
+.sad.color {
+    background-color: #ffaaa5;
+    background-size: cover;
+}
+
+.anxious.color {
+    background-color: #ffd3b6;
+    background-size: cover;
+}
+
+.calm.color {
+    background-color: #a8e6cf;
+    background-size: cover;
+}
+
+.highlight {
+    display: block;
+    background-color: white;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 30px;
+    text-align: center;
+}
+
+#today span span {
+    display: none;
+}
+
+/*TEST!*/
+.album-test {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 5px;
+}
+
+.entry-title {
+    display: inline-block;
+    margin: 1rem 1rem;
+    border-radius: 25px;
+}
+
+.date {
+    display: inline-block;
+    margin: 1rem 1rem;
+}
+
+.expand {
+    text-align: right;
+    margin: 1rem 1rem;
+}
+
+
+/*About page*/
+
+.icon {
+    height: 2em;
+}
+
+.aboutpagelogo {
+    height: 10em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+
+/* All style goes above here */
+
+@media (min-width: 598px) {
+    /* Beyond mobile phone design */
+    .moodbtn img {
+        margin: 1rem;
+        height: 5rem;
+        width: 5rem;
+    }
+    .calendar {
+        margin: 1rem 3rem;
+    }
+    .calendar h2 {
+        font-size: 2rem;
+    }
+    td {
+        padding-left: 0.75rem;
+        padding-top: 0.5rem;
+        font-size: 1rem;
+    }
+    .highlight {
+        display: block;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 30px;
+        text-align: center;
+    }
+    .prev,
+    .next {
+        font-size: 2rem;
+        padding: 1.5rem;
+    }
+    .today span span {
+        display: inline;
+        color: #7fb8ed;
+        font-size: smaller;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Medium design */
+    .calendar {
+        margin: 1rem 7rem;
+    }
+    .prev,
+    .next {
+        font-size: 2rem;
+        padding: 2rem;
+    }
+    table {
+        height: 50vw;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    .calendar h2 {
+        font-size: 2rem;
+    }
+    th {
+        font-size: 1.25rem;
+        padding: 0.75rem;
+    }
+}
+
+@media (min-width: 992px) {
+    /* Large design */
+    .calendar {
+        margin: 1rem 10rem;
+    }
+    .prev,
+    .next {
+        font-size: 3rem;
+        padding: 4rem;
+    }
+    h1 {
+        font-size: 4rem;
+    }
+    .calendar h2 {
+        font-size: 3rem;
+    }
+    td {
+        font-size: 1.75rem;
+    }
+    .highlight {
+        height: 3rem;
+        width: 3rem;
+    }
+}
