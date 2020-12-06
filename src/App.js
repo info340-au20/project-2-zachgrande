@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import AboutPage from './AboutUs.js';
 //import { Button } from 'reactstrap';
 
 function App() {
@@ -155,26 +157,26 @@ function LandingPage() {
   )
 }
 
-function AboutPage() {
-  return(
-    <section id="aboutPage">
-      <div className="aboutUs">
-        <img className="aboutpagelogo " src="img/logotransparent.png " alt="black icon of an opened book with a white musical note" />
-        <p> 
-          Sometimes it’s easier to express how you feel with a song.
-        </p>
-        <p>
-          SongNotes is a home for your daily journal, for you to get down your thoughts, how you feel today, and pick a song that “just fits” your mood. SongNotes connects with Spotify to let pick from a vast library of tracks, out of your personal playlists.
-        </p>
-        <p>
-          By the end of the month, we create a song calendar for you to track your mood, and when you like to hear certain songs.
-        </p>
-        <button className="btn btn-primary landingPage"> {/* need to implement an onClick here*/}
-          Make your first note
-        </button>
-      </div>
-    </section>
-  )
-}
+// function AboutPage() {
+//   return(
+//     <section id="aboutPage">
+//       <div className="aboutUs">
+//         <img className="aboutpagelogo " src="img/logotransparent.png " alt="black icon of an opened book with a white musical note" />
+//         <p> 
+//           Sometimes it’s easier to express how you feel with a song.
+//         </p>
+//         <p>
+//           SongNotes is a home for your daily journal, for you to get down your thoughts, how you feel today, and pick a song that “just fits” your mood. SongNotes connects with Spotify to let pick from a vast library of tracks, out of your personal playlists.
+//         </p>
+//         <p>
+//           By the end of the month, we create a song calendar for you to track your mood, and when you like to hear certain songs.
+//         </p>
+//         <button className="btn btn-primary landingPage"> {/* need to implement an onClick here*/}
+//           Make your first note
+//         </button>
+//       </div>
+//     </section>
+//   )
+// }
 
 export default App;
