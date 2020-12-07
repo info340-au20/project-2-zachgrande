@@ -204,8 +204,8 @@ function MoodSelect() {
   const [moodInput, setMoodInput] = useState();
   const handleClick = (event) => {
     let mood = event.currentTarget.classList.value;
-    event.currentTarget.src = "img/mood_buttons/" + mood + "_clicked" + ".jpg";
-    event.currentTarget.alt = mood + "selected"; 
+    //event.currentTarget.src = "img/mood_buttons/" + mood + "_clicked" + ".jpg";
+    //event.currentTarget.alt = mood + "selected"; 
     setMoodInput(mood);
   }
   console.log(moodInput) //need to pass this to the parent component
