@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 // import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import AboutPage from './AboutUs.js';
+import {renderTrack, fetchTrack} from './Track.js';
 //import Form from './Form.js';
 //import { Button } from 'reactstrap';
 
@@ -135,6 +136,7 @@ function Form(prop) {
     let userTitle = document.querySelector("#inputTitle").value;
     let userDate = document.querySelector("#inputDate").value;
     let userBody = document.querySelector("#inputBody").value;
+    let songSearch = document.querySelector('#songSearch').value;
 
     let newEntriesArray = [];
 
@@ -150,7 +152,7 @@ function Form(prop) {
       date: userDate,
       dayDescription: userBody,
       //moodRating: moodInput,
-      // song: fetchTrack(songSearch)
+      song: fetchTrack(songSearch)
     })
 
     // Replace the old state
