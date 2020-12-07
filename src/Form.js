@@ -3,6 +3,11 @@ function Form(prop) {
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
   // When a user submits the form, modify the state
+
+  const handleTest = (e) => {
+    console.log("clickity click");
+  }
+
   let handleSubmit = (event) => {
     event.preventDefault();
     let userTitle = document.querySelector("#inputTitle").value;
@@ -22,7 +27,7 @@ function Form(prop) {
       postTitle: userTitle,
       date: userDate,
       dayDescription: userBody,
-      // moodRating: moodInput,
+      moodRating: moodInput,
       // song: fetchTrack(songSearch)
     })
 
@@ -51,13 +56,13 @@ function Form(prop) {
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
-
-          <div className="mood-rating">
-            <div aria-label="calm select" className="moodbtn"><img className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
-            <div aria-label="happy select" className="moodbtn"><img className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
-            <div aria-label="anxious select" className="moodbtn"><img className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
-            <div aria-label="sad select" className="moodbtn"><img className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
-          </div>
+          {/*<div className="mood-rating">
+            <div aria-label="calm select" className="moodbtn"><img onClick={handleClick} className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
+            <div aria-label="happy select" className="moodbtn"><img onClick={handleClick} className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
+            <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
+            <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
+          </div>*/}
+          <MoodSelect entries={entries}/>
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
@@ -69,6 +74,49 @@ function Form(prop) {
       </form>
 
     </section>
+  )
+}
+
+function MoodSelect() {
+
+  const handleClick = (event) => {
+    console.log(event);
+  }
+  /*const [moodInput, setMoodInput] = useState();
+  const [isSelected, setSelection] = useState(false);
+  let clicked = "";
+  if(isSelected === true) {
+    clicked = "_clicked"
+  } else {
+    clicked = ""
+  }*/
+  
+
+
+
+  /*let handleClick = (event) => {
+    if (event.currentTarget.classList.contains("calmbtn")){
+      event.currentTarget.src = "img/mood_buttons/calm_clicked.jpg"
+      setMoodInput(calm)
+    }
+    if (event.currentTarget.classList.contains("happybtn")){
+      setMoodInput(happy)
+    }
+    if (event.currentTarget.classList.contains("anxioubtn")){
+      setMoodInput(anxious)
+    }
+    if (event.currentTarget.classList.contains("sadbtn")){
+      setMoodInput(sad)
+    }
+  }*/
+
+  return (
+    <div className="mood-rating">
+      <div aria-label="calm select" className="moodbtn"><img onClick={handleClick} className="calmbtn" src={"img/mood_buttons/calm" + clicked + ".jpg"} alt="calm" /></div>
+      <div aria-label="happy select" className="moodbtn"><img onClick={handleClick} className="happybtn" src={"img/mood_buttons/happy" + clicked + ".jpg"} alt="happy" /></div>
+      <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src={"img/mood_buttons/anxious" + clicked + ".jpg"} alt="anxious" /></div>
+      <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src={"img/mood_buttons/sad" + clicked + ".jpg"} alt="sad" /></div>
+    </div>
   )
 }
 export default Form;
