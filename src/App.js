@@ -17,10 +17,6 @@ function App() {
   const [entries, modifyEntries] = useState([]);
 
   const [pageDisplay, setPageDisplay] = useState();
-    // [{mood:"calm",
-    // album:"img/sample_album_covers/abbeyroad.jpg",
-    // entryTitle:"Entry Title",
-    // date:"date"}]);
 
   const handleNav = (event) => {
     if (event.currentTarget.classList.contains("homePage")){
@@ -99,7 +95,6 @@ function JournalLog(prop) {
 
       <div className="container">    
         {prop.logs.map((log) => {
-            //insert id of sorts
             count++;
             return <EntryLog key={count} log={log} />
           })}      
@@ -110,12 +105,14 @@ function JournalLog(prop) {
 }
 
 function EntryLog(prop) {
+  let log = prop.log;
   return (
     <div className="card mb-4">
-      <div className={"card-header color " + prop.mood}>
-        <img className="today album-test" src={prop.album} alt="album cover"/>
-        <h2 className="entry-title">{prop.entryTitle}</h2>
-        <p className="date">{prop.date}</p>
+      <div className={"card-header color " + log.mood}>
+        <img className="today album-test" src={log.album} alt="album cover"/>
+        <h2 className="entry-title">{log.postTitle}</h2>
+        <p className="date">{log.date}</p>
+        <p>{log.dayDescription}</p>
         <button className="btn btn-secondary">
           Expand
         </button>
