@@ -1,7 +1,8 @@
+//import src from '*.avif';
 import React, { useState } from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import AboutPage from './AboutUs.js';
-// import Form from './Form.js';
+//import Form from './Form.js';
 //import { Button } from 'reactstrap';
 
 function App() {
@@ -14,22 +15,28 @@ function App() {
   // - a song
   const [entries, modifyEntries] = useState();
 
-  const [pageDisplay, setPageDisplay] = useState(<JournalLog />)
+  const [pageDisplay, setPageDisplay] = useState();
 
   const handleNav = (event) => {
     console.log(event);
     console.log(event.currentTarget.classList);
     if (event.currentTarget.classList.contains("homePage")){
-      setPageDisplay(<JournalLog />)
+      setPageDisplay(<JournalLog logs={entries}/>)
     }
     if (event.currentTarget.classList.contains("landingPage")){
-      setPageDisplay(<Form entries={entries} modifyEntries={modifyEntries} />)
+      setPageDisplay(<Form entries={entries} modifyEntries={handleChange} />)
     }
-    if (event.currentTarget.classList.contains("aboutUs")){
+    if (event.currentTarget.classList.contains("about-us")){
+      console.log(entries);
       setPageDisplay(<AboutPage />)
     }
   }
 
+  const handleChange = (e) => {
+    // console.log("Adding this to state", e);
+    modifyEntries(e);
+    
+  }
 
   return (
     <div className="App">
@@ -70,14 +77,15 @@ function App() {
 
       <footer>
         <div className="footer-copyright text-center py-3"> &copy; INFO 340 AA -
-            <span role="button" className="aboutUs" onClick={handleNav}> About Us</span>
+            <span role="button" className="about-us" onClick={handleNav}> About Us</span>
         </div>
     </footer>
     </div>
   );
 }
 
-function JournalLog() {
+function JournalLog(prop) {
+  let count = 0;
   return(
     <section id="journalLog">
 
@@ -87,19 +95,24 @@ function JournalLog() {
       </div>
 
       <div className="container">    
-        <EntryLog />         
+        {prop.logs.map((log) => {
+            //insert id of sorts
+            count++;
+            return <EntryLog key={count} log={log} />
+          })}      
       </div> 
 
     </section>
   )
 }
 
-function EntryLog() {
+function EntryLog(prop) {
   //placeholder variables for things in the state
   let mood = "calm";
   let album = "img/sample_album_covers/abbeyroad.jpg";
   let entryTitle = "Entry Title";
   let date = "date";
+  let index = prop.key;
   
   return (
     <div className="card mb-4">
@@ -121,13 +134,12 @@ function Form(prop) {
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
   // When a user submits the form, modify the state
+
   let handleSubmit = (event) => {
     event.preventDefault();
     let userTitle = document.querySelector("#inputTitle").value;
     let userDate = document.querySelector("#inputDate").value;
     let userBody = document.querySelector("#inputBody").value;
-
-    // Take the above variables ^^ and store in an object, like lines 142-144.
 
     let newEntriesArray = [];
 
@@ -142,16 +154,14 @@ function Form(prop) {
       postTitle: userTitle,
       date: userDate,
       dayDescription: userBody,
-      // moodRating: moodInput,
+      //moodRating: moodInput,
       // song: fetchTrack(songSearch)
     })
 
-    // CREATE a new function near the state initialization
-    // CALL the function, passing as a prop the newly created object
-
     // Replace the old state and be done
-    modifyEntries(newEntriesArray);
-    // entries = newEntriesArray;
+    // modifyEntries(newEntriesArray);
+    entries = newEntriesArray;
+    console.log(entries);
   }
 
   return (
@@ -173,13 +183,13 @@ function Form(prop) {
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
-
-          <div className="mood-rating">
-            <div aria-label="calm select" className="moodbtn"><img className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
-            <div aria-label="happy select" className="moodbtn"><img className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
-            <div aria-label="anxious select" className="moodbtn"><img className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
-            <div aria-label="sad select" className="moodbtn"><img className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
-          </div>
+          {/*<div className="mood-rating">
+            <div aria-label="calm select" className="moodbtn"><img onClick={handleClick} className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
+            <div aria-label="happy select" className="moodbtn"><img onClick={handleClick} className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
+            <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
+            <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
+          </div>*/}
+          <MoodSelect />
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
@@ -191,6 +201,58 @@ function Form(prop) {
       </form>
 
     </section>
+  )
+}
+
+function MoodSelect() {
+
+  let moodOptions = [
+    {id:'calm', selected:false},
+    {id:'happy', selected:false},
+    {id:'anxious', selected:false},
+    {id:'sad', selected:false} 
+  ];
+
+  const [moodInput, setMoodInput] = useState();
+  const handleClick = (event) => {
+    let mood = event.currentTarget.classList.value;
+    //event.currentTarget.src = "img/mood_buttons/" + mood + "_clicked" + ".jpg";
+    //event.currentTarget.alt = mood + "selected"; 
+    setMoodInput(mood);
+  }
+  console.log(moodInput) //need to pass this to the parent component
+
+  let selectText = "";
+  let clickText = "";
+  let moodButtons = moodOptions.map((obj) => {
+    if(obj.id === moodInput){
+      obj.selected = true;
+    } else {
+      obj.selected = false;
+    }
+    if (obj.selected) {
+      selectText = " selected"
+      clickText = "_clicked"
+    } else {
+      selectText = ""
+      clickText = ""
+    }
+    return (
+      <div aria-label={obj.id + "select"} className="moodbtn">
+        <img 
+          onClick={handleClick} 
+          className={obj.id} 
+          src={"img/mood_buttons/"+ obj.id + clickText + ".jpg"} 
+          alt={obj.id + selectText}
+        />
+      </div>
+    )
+  })
+  
+  return (
+    <div className="mood-rating">
+      {moodButtons}
+    </div>
   )
 }
 

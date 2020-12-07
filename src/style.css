@@ -113,6 +113,58 @@ button a:hover {
     padding: 0.25rem;
 }
 
+thead {
+    background-color: #7fb8ed;
+    color: white;
+}
+
+th {
+    text-align: center;
+    font-size: 0.5rem;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    height: 60vw;
+    max-width: 100%;
+    margin-bottom: 2rem;
+    background-color: white;
+}
+
+td {
+    width: 5vw;
+    height: 5vw;
+    vertical-align: top;
+    border: 1px solid #7fb8ed;
+    color: #7fb8ed;
+    font-size: 0.5rem;
+    font-weight: bold;
+}
+
+td:hover {
+    border: 2px solid black;
+}
+
+.happy.album {
+    background-image: url('../img/sample_album_covers/abbeyroad.jpg');
+    background-size: cover;
+}
+
+.sad.album {
+    background-image: url('../img/sample_album_covers/LANYMalibuNights.png');
+    background-size: cover;
+}
+
+.anxious.album {
+    background-image: url('../img/sample_album_covers/lungs_album.jpg');
+    background-size: cover;
+}
+
+.calm.album {
+    background-image: url('../img/sample_album_covers/ohwonder_album.jpg');
+    background-size: cover;
+}
 
 .happy.color {
     background-color: #fdffab;
@@ -143,28 +195,8 @@ button a:hover {
     text-align: center;
 }
 
-
-/*TEST!*/
-.album-test {
-    height: 5rem;
-    width: 5rem;
-    border-radius: 5px;
-}
-
-.entry-title {
-    display: inline-block;
-    margin: 1rem 1rem;
-    border-radius: 25px;
-}
-
-.date {
-    display: inline-block;
-    margin: 1rem 1rem;
-}
-
-.expand {
-    text-align: right;
-    margin: 1rem 1rem;
+#today span span {
+    display: none;
 }
 
 
@@ -193,22 +225,82 @@ button a:hover {
         height: 5rem;
         width: 5rem;
     }
-    
+    .calendar {
+        margin: 1rem 3rem;
+    }
+    .calendar h2 {
+        font-size: 2rem;
+    }
+    td {
+        padding-left: 0.75rem;
+        padding-top: 0.5rem;
+        font-size: 1rem;
+    }
+    .highlight {
+        display: block;
+        height: 1.75rem;
+        width: 1.75rem;
+        border-radius: 30px;
+        text-align: center;
+    }
+    .prev,
+    .next {
+        font-size: 2rem;
+        padding: 1.5rem;
+    }
+    .today span span {
+        display: inline;
+        color: #7fb8ed;
+        font-size: smaller;
+    }
 }
 
 @media (min-width: 768px) {
     /* Medium design */
-    
+    .calendar {
+        margin: 1rem 7rem;
+    }
+    .prev,
+    .next {
+        font-size: 2rem;
+        padding: 2rem;
+    }
+    table {
+        height: 50vw;
+    }
     h1 {
         font-size: 3rem;
     }
-    
+    .calendar h2 {
+        font-size: 2rem;
+    }
+    th {
+        font-size: 1.25rem;
+        padding: 0.75rem;
+    }
 }
 
 @media (min-width: 992px) {
     /* Large design */
+    .calendar {
+        margin: 1rem 10rem;
+    }
+    .prev,
+    .next {
+        font-size: 3rem;
+        padding: 4rem;
+    }
     h1 {
         font-size: 4rem;
     }
-
+    .calendar h2 {
+        font-size: 3rem;
+    }
+    td {
+        font-size: 1.75rem;
+    }
+    .highlight {
+        height: 3rem;
+        width: 3rem;
+    }
 }
