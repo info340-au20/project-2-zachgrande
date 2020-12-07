@@ -26,13 +26,11 @@ function App() {
       setPageDisplay(<Form entries={entries} modifyEntries={handleChange} />)
     }
     if (event.currentTarget.classList.contains("about-us")){
-      console.log(entries);
       setPageDisplay(<AboutPage />)
     }
   }
 
   const handleChange = (e) => {
-    console.log("Adding this to state", e);
     modifyEntries(e);
     
   }
@@ -110,6 +108,7 @@ function EntryLog(prop) {
     <div className="card mb-4">
       <div className={"card-header color " + log.mood}>
         <img className="today album-test" src={log.album} alt="album cover"/>
+        <p>{"Song: " + log.trackName}</p>
         <h2 className="entry-title">{log.postTitle}</h2>
         <p className="date">{log.date}</p>
         <p>{log.dayDescription}</p>
@@ -142,6 +141,9 @@ function Form(prop) {
         return entry;
       })
     }
+
+    let fetchResults = fetchTrack(songSearch);
+    // [artwork URL, artist name, song title]
     
     // APPEND an additional entry
     newEntriesArray.push({
@@ -149,7 +151,9 @@ function Form(prop) {
       date: userDate,
       dayDescription: userBody,
       //moodRating: moodInput,
-      song: fetchTrack(songSearch)
+      artwork: fetchResults[0],
+      artist: fetchResults[1],
+      songTitle: fetchResults[2]
     })
 
     // Replace the old state
