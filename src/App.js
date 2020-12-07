@@ -177,7 +177,7 @@ function Form(prop) {
             <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
             <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
           </div>*/}
-          <MoodSelect/>
+          <MoodSelect />
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
@@ -194,21 +194,52 @@ function Form(prop) {
 
 function MoodSelect() {
 
+  let moodOptions = [
+    {id:'calm', selected:false},
+    {id:'happy', selected:false},
+    {id:'anxious', selected:false},
+    {id:'sad', selected:false} 
+  ];
+
   const [moodInput, setMoodInput] = useState();
   const handleClick = (event) => {
-
-    let mood = event.currentTarget.classList.value.replace("btn", "");
+    let mood = event.currentTarget.classList.value;
     event.currentTarget.src = "img/mood_buttons/" + mood + "_clicked" + ".jpg";
+    event.currentTarget.alt = mood + "selected"; 
     setMoodInput(mood);
   }
-  console.log(moodInput)
+  console.log(moodInput) //need to pass this to the parent component
+
+  let selectText = "";
+  let clickText = "";
+  let moodButtons = moodOptions.map((obj) => {
+    if(obj.id === moodInput){
+      obj.selected = true;
+    } else {
+      obj.selected = false;
+    }
+    if (obj.selected) {
+      selectText = " selected"
+      clickText = "_clicked"
+    } else {
+      selectText = ""
+      clickText = ""
+    }
+    return (
+      <div aria-label={obj.id + "select"} className="moodbtn">
+        <img 
+          onClick={handleClick} 
+          className={obj.id} 
+          src={"img/mood_buttons/"+ obj.id + clickText + ".jpg"} 
+          alt={obj.id + selectText}
+        />
+      </div>
+    )
+  })
   
   return (
     <div className="mood-rating">
-      <div aria-label="calm select" className="moodbtn"><img onClick={handleClick} className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
-      <div aria-label="happy select" className="moodbtn"><img onClick={handleClick} className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
-      <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
-      <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
+      {moodButtons}
     </div>
   )
 }
