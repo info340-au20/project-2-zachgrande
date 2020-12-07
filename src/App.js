@@ -15,22 +15,28 @@ function App() {
   // - a song
   const [entries, modifyEntries] = useState();
 
-  const [pageDisplay, setPageDisplay] = useState(<JournalLog />)
+  const [pageDisplay, setPageDisplay] = useState();
 
   const handleNav = (event) => {
     console.log(event);
     console.log(event.currentTarget.classList);
     if (event.currentTarget.classList.contains("homePage")){
-      setPageDisplay(<JournalLog />)
+      setPageDisplay(<JournalLog logs={entries}/>)
     }
     if (event.currentTarget.classList.contains("landingPage")){
-      setPageDisplay(<Form entries={entries} modifyEntries={modifyEntries} />)
+      setPageDisplay(<Form entries={entries} modifyEntries={handleChange} />)
     }
     if (event.currentTarget.classList.contains("about-us")){
+      console.log(entries);
       setPageDisplay(<AboutPage />)
     }
   }
 
+  const handleChange = (e) => {
+    // console.log("Adding this to state", e);
+    modifyEntries(e);
+    
+  }
 
   return (
     <div className="App">
@@ -78,7 +84,8 @@ function App() {
   );
 }
 
-function JournalLog() {
+function JournalLog(prop) {
+  let count = 0;
   return(
     <section id="journalLog">
 
@@ -88,19 +95,24 @@ function JournalLog() {
       </div>
 
       <div className="container">    
-        <EntryLog />         
+        {prop.logs.map((log) => {
+            //insert id of sorts
+            count++;
+            return <EntryLog key={count} log={log} />
+          })}      
       </div> 
 
     </section>
   )
 }
 
-function EntryLog() {
+function EntryLog(prop) {
   //placeholder variables for things in the state
   let mood = "calm";
   let album = "img/sample_album_covers/abbeyroad.jpg";
   let entryTitle = "Entry Title";
   let date = "date";
+  let index = prop.key;
   
   return (
     <div className="card mb-4">
