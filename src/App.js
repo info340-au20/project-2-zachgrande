@@ -1,6 +1,6 @@
 //import src from '*.avif';
 import React, { useState } from 'react';
-import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+// import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import AboutPage from './AboutUs.js';
 //import Form from './Form.js';
 //import { Button } from 'reactstrap';
@@ -13,13 +13,15 @@ function App() {
   // - a description
   // - a mood rating
   // - a song
-  const [entries, modifyEntries] = useState();
+  const [entries, modifyEntries] = useState([]);
 
   const [pageDisplay, setPageDisplay] = useState();
+    // [{mood:"calm",
+    // album:"img/sample_album_covers/abbeyroad.jpg",
+    // entryTitle:"Entry Title",
+    // date:"date"}]);
 
   const handleNav = (event) => {
-    console.log(event);
-    console.log(event.currentTarget.classList);
     if (event.currentTarget.classList.contains("homePage")){
       setPageDisplay(<JournalLog logs={entries}/>)
     }
@@ -33,7 +35,7 @@ function App() {
   }
 
   const handleChange = (e) => {
-    // console.log("Adding this to state", e);
+    console.log("Adding this to state", e);
     modifyEntries(e);
     
   }
@@ -107,19 +109,12 @@ function JournalLog(prop) {
 }
 
 function EntryLog(prop) {
-  //placeholder variables for things in the state
-  let mood = "calm";
-  let album = "img/sample_album_covers/abbeyroad.jpg";
-  let entryTitle = "Entry Title";
-  let date = "date";
-  let index = prop.key;
-  
   return (
     <div className="card mb-4">
-      <div className={"card-header color " + mood}>
-        <img className="today album-test" src={album} alt="album cover"/>
-        <h2 className="entry-title">{entryTitle}</h2>
-        <p className="date">{date}</p>
+      <div className={"card-header color " + prop.mood}>
+        <img className="today album-test" src={prop.album} alt="album cover"/>
+        <h2 className="entry-title">{prop.entryTitle}</h2>
+        <p className="date">{prop.date}</p>
         <button className="btn btn-secondary">
           Expand
         </button>
@@ -133,8 +128,8 @@ function Form(prop) {
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
-  // When a user submits the form, modify the state
 
+  // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
     let userTitle = document.querySelector("#inputTitle").value;
@@ -143,7 +138,7 @@ function Form(prop) {
 
     let newEntriesArray = [];
 
-    if (entries !== undefined) {
+    if (entries !== []) {
       newEntriesArray = entries.map((entry) => {
         return entry;
       })
@@ -158,10 +153,8 @@ function Form(prop) {
       // song: fetchTrack(songSearch)
     })
 
-    // Replace the old state and be done
-    // modifyEntries(newEntriesArray);
-    entries = newEntriesArray;
-    console.log(entries);
+    // Replace the old state
+    modifyEntries(newEntriesArray);
   }
 
   return (
@@ -169,16 +162,16 @@ function Form(prop) {
 
       <form>
         <div className="form-group">
-          <label for="inputTitle">Post Title</label>
+          <label htmlFor="inputTitle">Post Title</label>
           <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" />
         </div>
         <div className="form-group">
-          <label for="inputDate">Day</label>
+          <label htmlFor="inputDate">Day</label>
           <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required />
           <div id="dateFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
-          <label for="inputBody">How was your day?</label>
+          <label htmlFor="inputBody">How was your day?</label>
           <textarea className="form-control" id="inputBody" rows="3"></textarea>
         </div>
         <div className="form-group">
@@ -193,7 +186,7 @@ function Form(prop) {
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
-          <label for="songSearch">Search for Today's Song</label>
+          <label htmlFor="songSearch">Search for Today's Song</label>
           <span className="glyphicon glyphicon-search"></span>
           <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" />
         </div>
@@ -220,7 +213,7 @@ function MoodSelect() {
     //event.currentTarget.alt = mood + "selected"; 
     setMoodInput(mood);
   }
-  console.log(moodInput) //need to pass this to the parent component
+  // console.log(moodInput) //need to pass this to the parent component
 
   let selectText = "";
   let clickText = "";
