@@ -3,7 +3,6 @@ function AboutPage() {
       <section id="aboutPage">
         <div className="aboutUs">
           <img className="aboutpagelogo" src="img/logotransparent.png" alt="black icon of an opened book with a white musical note" />
-          {/* <img className="card-img-top" src="img/logotransparent.png" alt="black icon of an opened book with a white musical note" /> */}
           <p> 
             Sometimes it’s easier to express how you feel with a song.
           </p>

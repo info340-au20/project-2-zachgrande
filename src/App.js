@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import AboutPage from './AboutUs.js';
+import Form from './Form.js';
 //import { Button } from 'reactstrap';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
       setPageDisplay(<JournalLog />)
     }
     if (event.currentTarget.classList.contains("landingPage")){
-      setPageDisplay(<LandingPage />)
+      setPageDisplay(<Form />)
     }
     if (event.currentTarget.classList.contains("aboutUs")){
       setPageDisplay(<AboutPage />)
@@ -32,7 +33,6 @@ function App() {
 
 
   return (
-    
     <div className="App">
       <header className="page-header">
         <h1>SongNotes</h1>
@@ -115,68 +115,5 @@ function EntryLog() {
     </div>
   )
 }
-
-function LandingPage() {
-  return(
-    <section id="landingPage">
-
-      <form>
-        <div className="form-group">
-          <label for="inputTitle">Post Title</label>
-          <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" />
-        </div>
-        <div className="form-group">
-          <label for="inputDate">Day</label>
-          <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required />
-        <div id="dateFeedback" className="invalid-feedback"></div>
-            </div>
-                <div className="form-group">
-                    <label for="inputBody">How was your day?</label>
-                    <textarea className="form-control" id="inputBody" rows="3"></textarea>
-                </div>
-                <div className="form-group">
-                    <p role="label">Today's Mood Rating</p>
-                    
-                    <div className="mood-rating">
-                        <div aria-label="calm select" className="moodbtn"><img className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
-                        <div aria-label="happy select" className="moodbtn"><img className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
-                        <div aria-label="anxious select" className="moodbtn"><img className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
-                        <div aria-label="sad select" className="moodbtn"><img className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
-                    </div>
-                    <div id="moodFeedback" className="invalid-feedback"></div>
-                </div>
-                <div className="form-group">
-                    <label for="songSearch">Search for Today's Song</label>
-                    <span className="glyphicon glyphicon-search"></span>
-                    <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" />
-                </div>
-                <button className="btn btn-primary" id="submit">Done</button>
-      </form>
-
-    </section>
-  )
-}
-
-// function AboutPage() {
-//   return(
-//     <section id="aboutPage">
-//       <div className="aboutUs">
-//         <img className="aboutpagelogo " src="img/logotransparent.png " alt="black icon of an opened book with a white musical note" />
-//         <p> 
-//           Sometimes it’s easier to express how you feel with a song.
-//         </p>
-//         <p>
-//           SongNotes is a home for your daily journal, for you to get down your thoughts, how you feel today, and pick a song that “just fits” your mood. SongNotes connects with Spotify to let pick from a vast library of tracks, out of your personal playlists.
-//         </p>
-//         <p>
-//           By the end of the month, we create a song calendar for you to track your mood, and when you like to hear certain songs.
-//         </p>
-//         <button className="btn btn-primary landingPage"> {/* need to implement an onClick here*/}
-//           Make your first note
-//         </button>
-//       </div>
-//     </section>
-//   )
-// }
 
 export default App;
