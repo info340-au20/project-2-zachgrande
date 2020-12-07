@@ -5,13 +5,16 @@ import App from './App';
 // import { BrowserRouter } from 'react-router-dom';
 // import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
+// import Firebase, {FirebaseContext} from 'firebase/app';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <link rel="manifest" href="./public/manifest.json" />
     {/* <BrowserRouter> */}
+    {/* <FirebaseContext.Provider value={new Firebase()}> */}
       <App />
+    {/* </FirebaseContext.Provider> */}
     {/* </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root')
