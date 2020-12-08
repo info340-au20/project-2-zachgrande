@@ -56,6 +56,10 @@ nav ul {
     display: inline-block;
 }
 
+.nav-link {
+    color: white;
+}
+
 footer {
     margin: 1rem;
     opacity: 50%;

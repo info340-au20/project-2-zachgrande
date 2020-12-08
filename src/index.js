@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-// import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 // import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 // import Firebase, {FirebaseContext} from 'firebase/app';
@@ -11,11 +11,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 ReactDOM.render(
   <React.StrictMode>
     <link rel="manifest" href="./public/manifest.json" />
-    {/* <BrowserRouter> */}
+    <BrowserRouter>
     {/* <FirebaseContext.Provider value={new Firebase()}> */}
       <App />
     {/* </FirebaseContext.Provider> */}
-    {/* </BrowserRouter> */}
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,8 +1,9 @@
 //import src from '*.avif';
 import React, { useState } from 'react';
-// import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 import AboutPage from './AboutUs.js';
-import {renderTrack, fetchTrack} from './Track.js';
+import { renderTrack, fetchTrack } from './Track.js';
 //import Form from './Form.js';
 //import { Button } from 'reactstrap';
 
@@ -16,32 +17,51 @@ function App() {
   // - a song
   const [entries, modifyEntries] = useState([]);
 
-  const [pageDisplay, setPageDisplay] = useState();
+  // const [pageDisplay, setPageDisplay] = useState();
 
-  const handleNav = (event) => {
-    if (event.currentTarget.classList.contains("homePage")){
-      setPageDisplay(<JournalLog logs={entries}/>)
-    }
-    if (event.currentTarget.classList.contains("landingPage")){
-      setPageDisplay(<Form entries={entries} modifyEntries={handleChange} />)
-    }
-    if (event.currentTarget.classList.contains("about-us")){
-      setPageDisplay(<AboutPage />)
-    }
-  }
+  // const handleNav = (event) => {
+  //   if (event.currentTarget.classList.contains("homePage")) {
+  //     setPageDisplay(<JournalLog logs={entries} />)
+  //   }
+  //   if (event.currentTarget.classList.contains("landingPage")) {
+  //     setPageDisplay(<Form entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />)
+  //   }
+  //   if (event.currentTarget.classList.contains("about-us")) {
+  //     setPageDisplay(<AboutPage />)
+  //   }
+  // }
 
   const handleChange = (e) => {
     modifyEntries(e);
-    
+  }
+
+  const renderJournalLog = (routerProps) => {
+    if (entries.length === 0) {
+      return (
+        <div>
+          <p>You have not created any journal entries!</p>
+          <p>You can create an entry by visiting the <NavLink to="create-entry" className="nav-link" activeClassName={"activeLink"}>Create an Entry</NavLink> tab.</p>
+        </div>
+      )
+    } else {
+      return <JournalLog {...routerProps} logs={entries} />
+    }
+  }
+
+  const renderForm = (routerProps) => {
+    return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
+  }
+
+  const sendUserHome = () => {
+    return <Redirect to="/" />
   }
 
   return (
     <div className="App">
       <header className="page-header">
-        <h1>SongNotes</h1>
-
-        {/*<NavBar />*/}
-        <div>
+        <h1><Link to="/">SongNotes</Link></h1>
+        <NavigationBar />
+        {/* <div>
           <nav>
             <ul>
               <li>
@@ -60,7 +80,17 @@ function App() {
               </li>
             </ul>
           </nav>
-         </div>
+         </div> */}
+        <nav className="row">
+          <div className="col-3">
+            <Switch>
+              <Route exact path="/" render={renderJournalLog} />
+              <Route path="/create-entry" render={renderForm} />
+              <Route path="/about-us" component={AboutPage} />
+              <Redirect to="/" />
+            </Switch>
+          </div>
+        </nav>
 
 
       </header>
@@ -69,34 +99,45 @@ function App() {
         {/*<JournalLog />
         <LandingPage />
         <AboutPage />*/}
-        {pageDisplay}
+        {/* {pageDisplay} */}
       </main>
 
       <footer>
         <div className="footer-copyright text-center py-3"> &copy; INFO 340 AA -
-            <span role="button" className="about-us" onClick={handleNav}> About Us</span>
+            {/* <span role="button" className="about-us" onClick={handleNav}> About Us</span> */}
+            <NavLink exact to="/about-us" className="nav-link-1" activeClassName={"activeLink"}> About Us</NavLink>
+
         </div>
-    </footer>
+      </footer>
     </div>
   );
 }
 
+function NavigationBar() {
+  return (
+    <Navbar bg="primary">
+      <li><NavLink exact to="/" className="nav-link" activeClassName={"activeLink"}>Home</NavLink></li>
+      <li><NavLink to="create-entry" className="nav-link" activeClassName={"activeLink"}>Create an Entry</NavLink></li>
+    </Navbar>
+  )
+}
+
 function JournalLog(prop) {
   let count = 0;
-  return(
+  return (
     <section id="journalLog">
-
-      <div className="btn-group-sm d-flex justify-content-sm-center justify-content-lg-end p-3" role="group" aria-label="viewing mode buttons">
+      {/* Does not work currently, will be replaced by future sorting options */}
+      {/* <div className="btn-group-sm d-flex justify-content-sm-center justify-content-lg-end p-3" role="group" aria-label="viewing mode buttons">
         <button className="btn btn-secondary album-btn">Album Covers</button>
         <button className="btn btn-secondary color-btn">Mood Colors</button>
-      </div>
+      </div> */}
 
-      <div className="container">    
+      <div className="container">
         {prop.logs.map((log) => {
-            count++;
-            return <EntryLog key={count} log={log} />
-          })}      
-      </div> 
+          count++;
+          return <EntryLog key={count} log={log} />
+        })}
+      </div>
 
     </section>
   )
@@ -107,7 +148,7 @@ function EntryLog(prop) {
   return (
     <div className="card mb-4">
       <div className={"card-header color " + log.mood}>
-        <img className="today album-test" src={log.album} alt="album cover"/>
+        <img className="today album-test" src={log.album} alt="album cover" />
         <p>{"Song: " + log.trackName}</p>
         <h2 className="entry-title">{log.postTitle}</h2>
         <p className="date">{log.date}</p>
@@ -144,7 +185,7 @@ function Form(prop) {
 
     let fetchResults = fetchTrack(songSearch);
     // [artwork URL, artist name, song title]
-    
+
     // APPEND an additional entry
     newEntriesArray.push({
       postTitle: userTitle,
@@ -158,6 +199,7 @@ function Form(prop) {
 
     // Replace the old state
     modifyEntries(newEntriesArray);
+    prop.completionAction();
   }
 
   return (
@@ -203,10 +245,10 @@ function Form(prop) {
 function MoodSelect() {
 
   let moodOptions = [
-    {id:'calm', selected:false},
-    {id:'happy', selected:false},
-    {id:'anxious', selected:false},
-    {id:'sad', selected:false} 
+    { id: 'calm', selected: false },
+    { id: 'happy', selected: false },
+    { id: 'anxious', selected: false },
+    { id: 'sad', selected: false }
   ];
 
   const [moodInput, setMoodInput] = useState();
@@ -221,7 +263,7 @@ function MoodSelect() {
   let selectText = "";
   let clickText = "";
   let moodButtons = moodOptions.map((obj) => {
-    if(obj.id === moodInput){
+    if (obj.id === moodInput) {
       obj.selected = true;
     } else {
       obj.selected = false;
@@ -234,17 +276,17 @@ function MoodSelect() {
       clickText = ""
     }
     return (
-      <div aria-label={obj.id + "select"} className="moodbtn">
-        <img 
-          onClick={handleClick} 
-          className={obj.id} 
-          src={"img/mood_buttons/"+ obj.id + clickText + ".jpg"} 
+      <div key={obj.id} aria-label={obj.id + "select"} className="moodbtn">
+        <img
+          onClick={handleClick}
+          className={obj.id}
+          src={"img/mood_buttons/" + obj.id + clickText + ".jpg"}
           alt={obj.id + selectText}
         />
       </div>
     )
   })
-  
+
   return (
     <div className="mood-rating">
       {moodButtons}
