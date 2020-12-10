@@ -35,11 +35,13 @@ function App() {
   }
 
   const renderForm = (routerProps) => {
+    console.log(routerProps);
     return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
   const sendUserHome = () => {
     return <Redirect to="/" />
+    // return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
   return (

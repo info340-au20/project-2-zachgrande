@@ -10,6 +10,7 @@ function Form(prop) {
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
+
     let userTitle = document.querySelector("#inputTitle").value;
     let userDate = document.querySelector("#inputDate").value;
     let userBody = document.querySelector("#inputBody").value;
@@ -17,12 +18,14 @@ function Form(prop) {
 
     let newEntriesArray = [];
 
+    // Pre-process our existing entries for the new state
     if (entries !== []) {
       newEntriesArray = entries.map((entry) => {
         return entry;
       })
     }
 
+    // Add the final entry to the state and keep the program moving
     const finalizeUserInput = (searchResults) => {
       // Extract the fetch data, top result
       searchResults = searchResults.results[0];
@@ -44,7 +47,10 @@ function Form(prop) {
 
       // Replace the old state
       modifyEntries(newEntriesArray);
-      prop.completionAction();
+      // prop.completionAction();
+      // <Route exact path="/" />
+      // console.log(prop.router);
+      prop.routerProps.history.push('/');
     }
 
     // The final step of our form, ensure nothing is computed until fetch completes
@@ -70,14 +76,7 @@ function Form(prop) {
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
-          {/*<div className="mood-rating">
-            <div aria-label="calm select" className="moodbtn"><img onClick={handleClick} className="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm" /></div>
-            <div aria-label="happy select" className="moodbtn"><img onClick={handleClick} className="happybtn" src="img/mood_buttons/happy.jpg" alt="happy" /></div>
-            <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
-            <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
-          </div>*/}
           <MoodSelect />
-          {/* {prop.MoodSelect} */}
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
