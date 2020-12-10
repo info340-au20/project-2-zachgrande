@@ -4,6 +4,7 @@ import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import NavigationBar from './NavigationBar.js';
 import AboutPage from './AboutUs.js';
 import Form from './Form.js';
+import JournalLog from './JournalLog.js';
 //import Form from './Form.js';
 //import { Button } from 'reactstrap';
 
@@ -35,7 +36,6 @@ function App() {
   }
 
   const renderForm = (routerProps) => {
-    console.log(routerProps);
     return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
@@ -101,44 +101,6 @@ function App() {
       </footer>
     </div>
   );
-}
-
-function JournalLog(prop) {
-  let count = 0;
-  return (
-    <section id="journalLog">
-      {/* Does not work currently, will be replaced by future sorting options */}
-      {/* <div className="btn-group-sm d-flex justify-content-sm-center justify-content-lg-end p-3" role="group" aria-label="viewing mode buttons">
-        <button className="btn btn-secondary album-btn">Album Covers</button>
-        <button className="btn btn-secondary color-btn">Mood Colors</button>
-      </div> */}
-
-      <div className="container">
-        {prop.logs.map((log) => {
-          count++;
-          return <EntryLog key={count} log={log} />
-        })}
-      </div>
-
-    </section>
-  )
-}
-
-function EntryLog(prop) {
-  let log = prop.log;
-  return (
-    <div className="card mb-4">
-      <div className={"card-header color " + log.mood}>
-        <img className="today album-test" src={log.artwork} alt="album cover" />
-        <h2 className="entry-title">{log.postTitle}</h2>
-        <p className="date">{log.date}</p>
-        <p>{log.dayDescription}</p>
-        <button className="btn btn-secondary">
-          Expand
-        </button>
-      </div>
-    </div>
-  )
 }
 
 export default App;

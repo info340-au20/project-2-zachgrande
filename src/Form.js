@@ -50,7 +50,7 @@ function Form(prop) {
       // prop.completionAction();
       // <Route exact path="/" />
       // console.log(prop.router);
-      prop.routerProps.history.push('/');
+      // prop.routerProps.history.push('/');
     }
 
     // The final step of our form, ensure nothing is computed until fetch completes
