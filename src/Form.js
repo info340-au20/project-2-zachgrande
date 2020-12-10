@@ -76,7 +76,7 @@ function Form(prop) {
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
-          <MoodSelect />
+          <MoodSelect /> 
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
