@@ -1,40 +1,54 @@
+import fetchTrack from './Track.js';
+import MoodSelect from './MoodSelect.js';
+
+// Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
+
   // When a user submits the form, modify the state
-
-  const handleTest = (e) => {
-    console.log("clickity click");
-  }
-
   let handleSubmit = (event) => {
     event.preventDefault();
     let userTitle = document.querySelector("#inputTitle").value;
     let userDate = document.querySelector("#inputDate").value;
     let userBody = document.querySelector("#inputBody").value;
+    let songSearch = document.querySelector('#songSearch').value;
 
     let newEntriesArray = [];
 
-    if (entries !== undefined) {
+    if (entries !== []) {
       newEntriesArray = entries.map((entry) => {
         return entry;
       })
     }
-    
-    // APPEND an additional entry
-    newEntriesArray.push({
-      postTitle: userTitle,
-      date: userDate,
-      dayDescription: userBody,
-      moodRating: moodInput,
-      // song: fetchTrack(songSearch)
-    })
 
-    // Replace the old state and be done
-    // modifyEntries(newEntriesArray);
-    entries = newEntriesArray;
-    console.log(entries);
+    const finalizeUserInput = (searchResults) => {
+      // Extract the fetch data, top result
+      searchResults = searchResults.results[0];
+
+      // Select the song elements to go in the entry
+      // [artwork URL, artist name, song title]
+      let songEntry = [searchResults.artworkUrl100, searchResults.artistName, searchResults.trackName];
+
+      // Append an additional entry
+      newEntriesArray.push({
+        postTitle: userTitle,
+        date: userDate,
+        dayDescription: userBody,
+        //moodRating: moodInput,
+        artwork: songEntry[0],
+        artist: songEntry[1],
+        songTitle: songEntry[2]
+      });
+
+      // Replace the old state
+      modifyEntries(newEntriesArray);
+      prop.completionAction();
+    }
+
+    // The final step of our form, ensure nothing is computed until fetch completes
+    fetchTrack(songSearch, finalizeUserInput);
   }
 
   return (
@@ -42,16 +56,16 @@ function Form(prop) {
 
       <form>
         <div className="form-group">
-          <label for="inputTitle">Post Title</label>
+          <label htmlFor="inputTitle">Post Title</label>
           <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" />
         </div>
         <div className="form-group">
-          <label for="inputDate">Day</label>
+          <label htmlFor="inputDate">Day</label>
           <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required />
           <div id="dateFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
-          <label for="inputBody">How was your day?</label>
+          <label htmlFor="inputBody">How was your day?</label>
           <textarea className="form-control" id="inputBody" rows="3"></textarea>
         </div>
         <div className="form-group">
@@ -62,11 +76,12 @@ function Form(prop) {
             <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious" /></div>
             <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad" /></div>
           </div>*/}
-          <MoodSelect entries={entries}/>
+          <MoodSelect />
+          {/* {prop.MoodSelect} */}
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
-          <label for="songSearch">Search for Today's Song</label>
+          <label htmlFor="songSearch">Search for Today's Song</label>
           <span className="glyphicon glyphicon-search"></span>
           <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" />
         </div>
@@ -77,46 +92,4 @@ function Form(prop) {
   )
 }
 
-function MoodSelect() {
-
-  const handleClick = (event) => {
-    console.log(event);
-  }
-  /*const [moodInput, setMoodInput] = useState();
-  const [isSelected, setSelection] = useState(false);
-  let clicked = "";
-  if(isSelected === true) {
-    clicked = "_clicked"
-  } else {
-    clicked = ""
-  }*/
-  
-
-
-
-  /*let handleClick = (event) => {
-    if (event.currentTarget.classList.contains("calmbtn")){
-      event.currentTarget.src = "img/mood_buttons/calm_clicked.jpg"
-      setMoodInput(calm)
-    }
-    if (event.currentTarget.classList.contains("happybtn")){
-      setMoodInput(happy)
-    }
-    if (event.currentTarget.classList.contains("anxioubtn")){
-      setMoodInput(anxious)
-    }
-    if (event.currentTarget.classList.contains("sadbtn")){
-      setMoodInput(sad)
-    }
-  }*/
-
-  return (
-    <div className="mood-rating">
-      <div aria-label="calm select" className="moodbtn"><img onClick={handleClick} className="calmbtn" src={"img/mood_buttons/calm" + clicked + ".jpg"} alt="calm" /></div>
-      <div aria-label="happy select" className="moodbtn"><img onClick={handleClick} className="happybtn" src={"img/mood_buttons/happy" + clicked + ".jpg"} alt="happy" /></div>
-      <div aria-label="anxious select" className="moodbtn"><img onClick={handleClick} className="anxiousbtn" src={"img/mood_buttons/anxious" + clicked + ".jpg"} alt="anxious" /></div>
-      <div aria-label="sad select" className="moodbtn"><img onClick={handleClick} className="sadbtn" src={"img/mood_buttons/sad" + clicked + ".jpg"} alt="sad" /></div>
-    </div>
-  )
-}
 export default Form;
