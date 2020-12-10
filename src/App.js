@@ -1,7 +1,7 @@
 //import src from '*.avif';
 import React, { useState } from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
-import { Navbar } from 'react-bootstrap';
+import NavigationBar from './NavigationBar.js';
 import AboutPage from './AboutUs.js';
 import { renderTrack, fetchTrack } from './Track.js';
 //import Form from './Form.js';
@@ -100,26 +100,19 @@ function App() {
         <LandingPage />
         <AboutPage />*/}
         {/* {pageDisplay} */}
+        {/* {console.log("This is what the state looks like right now:")} */}
+        {/* {console.log(entries)} */}
       </main>
 
       <footer>
         <div className="footer-copyright text-center py-3"> &copy; INFO 340 AA -
             {/* <span role="button" className="about-us" onClick={handleNav}> About Us</span> */}
-            <NavLink exact to="/about-us" className="nav-link-1" activeClassName={"activeLink"}> About Us</NavLink>
+          <NavLink exact to="/about-us" className="nav-link-1" activeClassName={"activeLink"}> About Us</NavLink>
 
         </div>
       </footer>
     </div>
   );
-}
-
-function NavigationBar() {
-  return (
-    <Navbar bg="primary">
-      <li><NavLink exact to="/" className="nav-link" activeClassName={"activeLink"}>Home</NavLink></li>
-      <li><NavLink to="create-entry" className="nav-link" activeClassName={"activeLink"}>Create an Entry</NavLink></li>
-    </Navbar>
-  )
 }
 
 function JournalLog(prop) {
@@ -148,8 +141,7 @@ function EntryLog(prop) {
   return (
     <div className="card mb-4">
       <div className={"card-header color " + log.mood}>
-        <img className="today album-test" src={log.album} alt="album cover" />
-        <p>{"Song: " + log.trackName}</p>
+        <img className="today album-test" src={log.artwork} alt="album cover" />
         <h2 className="entry-title">{log.postTitle}</h2>
         <p className="date">{log.date}</p>
         <p>{log.dayDescription}</p>
@@ -183,23 +175,35 @@ function Form(prop) {
       })
     }
 
-    let fetchResults = fetchTrack(songSearch);
-    // [artwork URL, artist name, song title]
+    const finalizeUserInput = (searchResults) => {
+      // Extract the fetch data, top result
+      searchResults = searchResults.results[0];
 
-    // APPEND an additional entry
-    newEntriesArray.push({
-      postTitle: userTitle,
-      date: userDate,
-      dayDescription: userBody,
-      //moodRating: moodInput,
-      artwork: fetchResults[0],
-      artist: fetchResults[1],
-      songTitle: fetchResults[2]
-    })
+      // Select the song elements to go in the entry
+      // [artwork URL, artist name, song title]
+      let songEntry = [searchResults.artworkUrl100, searchResults.artistName, searchResults.trackName];
 
-    // Replace the old state
-    modifyEntries(newEntriesArray);
-    prop.completionAction();
+      console.log(songEntry);
+
+      // Append an additional entry
+      newEntriesArray.push({
+        postTitle: userTitle,
+        date: userDate,
+        dayDescription: userBody,
+        //moodRating: moodInput,
+        artwork: songEntry[0],
+        artist: songEntry[1],
+        songTitle: songEntry[2]
+      });
+
+      // Replace the old state
+      modifyEntries(newEntriesArray);
+      console.log(newEntriesArray);
+      prop.completionAction();
+    }
+
+    // The final step of our form, ensure nothing is computed until fetch completes
+    fetchTrack(songSearch, finalizeUserInput);
   }
 
   return (

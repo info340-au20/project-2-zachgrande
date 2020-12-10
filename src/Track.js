@@ -27,15 +27,14 @@ function renderSearchResults(searchResults) {
 
 // Find the desired album artwork from the internet
 const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
-function fetchTrack(searchTerm) {
+function fetchTrack(searchTerm, processData) {
   let url = URL_TEMPLATE.replace("{searchTerm}", searchTerm);
   return fetch(url)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      renderSearchResults(data);
-      // return data;
+      processData(data);
     })
     .catch(function (error) {
       console.log("No results found.");
