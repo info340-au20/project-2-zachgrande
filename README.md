@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# SongNotes
+## By: Zach Grande, Rebecca Haynes, Gideon Chia, Brendan Jacobsen, Jerray Wu
+### INFO 340 Autumn 2020: Project 2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains code for an interactive web app, created for the _Client-Side Web Development_ course at the UW iSchool.
 
-## Available Scripts
+The site can be viewed at <https://info-340-project-2-6e95f.firebaseapp.com/>
 
-In the project directory, you can run:
+# The Application
+Our application is be targeted at college students and young adults. Users can view a list of their journal entries, color-coded by how positive or negative their day was.
 
-### `npm start`
+The first main interaction method with the application is to input journal entries. Users can input their thoughts for the day and rate their feelings as well as include a song choice to represent the day.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+__Potentially Delete__
+Our second main interaction method with the application is to create visualizations on an easy-to-read calendar. Users can have the option to filter through past entries by categories or keywords.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Our second main interaction method with the application is to allow users to expand each invididual entry to learn more about it. When an entry is expanded, the user has the option to delete it from their history.
 
-### `npm test`
+We think combining journaling with an app catered towards young adults along with music and music therapy could make for a much more effective and engaging application than the current options available.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# The Code
+### `AboutUs.js`
+An overview of our mission and goals.
 
-### `npm run build`
+### `App.js`
+Main operating file for the project, handles page redirection.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `Entry.js`
+A single journal entry. This can be used to append to `JournalLog.js`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `Form.js`
+Handles a new journal entry submission. Also renders `MoodSelect.js` to show mood options.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `JournalLog.js`
+Renders a list of one user's journal entries.
 
-### `npm run eject`
+### `MoodSelect.js`
+Presents the user with mood options to choose from, which are later shown on the main page.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `NavigationBar.js`
+Allows the user to change which page they are viewing.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `Track.js`
+Handles the fetch functionality to give each entry a unique song.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `history.js`
+Allows the user to be redirected upon completion of various actions.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### `index.css`
+Styling for the application.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `index.js`
+Initialize and run the application.
