@@ -7,15 +7,40 @@ import history from './history.js';
 // import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 // import Firebase, {FirebaseContext} from 'firebase/app';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+
+// <!-- The core Firebase JS SDK is always required and must be listed first -->
+// <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+
+// <!-- TODO: Add SDKs for Firebase products that you want to use
+//      https://firebase.google.com/docs/web/setup#available-libraries -->
+{/* <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-analytics.js"></script> */ }
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCZyzL8yth7VmE8mOG1T75ztM0v3SAMzFg",
+  authDomain: "info-340-project-2-6e95f.firebaseapp.com",
+  projectId: "info-340-project-2-6e95f",
+  storageBucket: "info-340-project-2-6e95f.appspot.com",
+  messagingSenderId: "588622978497",
+  appId: "1:588622978497:web:c8a160b8f8bfdede12a340",
+  measurementId: "G-02TNKY9483"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 
 ReactDOM.render(
   <React.StrictMode>
     <link rel="manifest" href="./public/manifest.json" />
     <Router history={history}>
-    {/* <FirebaseContext.Provider value={new Firebase()}> */}
+      {/* <FirebaseContext.Provider value={new Firebase()}> */}
       <App />
-    {/* </FirebaseContext.Provider> */}
+      {/* </FirebaseContext.Provider> */}
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
