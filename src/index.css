@@ -60,6 +60,14 @@ nav ul {
     color: white;
 }
 
+button.signOutBtn {
+    top: 0;
+    right: 0;
+    padding: .5rem;
+    margin: .5rem;
+    position: absolute;
+}
+
 footer {
     margin: 1rem;
     /* position: absolute; */

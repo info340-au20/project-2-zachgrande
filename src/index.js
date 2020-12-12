@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import Firebase, {FirebaseContext} from 'firebase/app';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/database'; // comment out if unnecessary
 
 // <!-- The core Firebase JS SDK is always required and must be listed first -->
 // <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
@@ -31,7 +31,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+// firebase.analytics();
 
 
 ReactDOM.render(

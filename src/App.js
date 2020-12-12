@@ -1,11 +1,30 @@
 //import src from '*.avif';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import NavigationBar from './NavigationBar.js';
 import AboutPage from './AboutUs.js';
 import Form from './Form.js';
 import JournalLog from './JournalLog.js';
 //import { Button } from 'reactstrap';
+import firebase from 'firebase/app';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import 'firebase/auth';
+import 'firebase/database';
+
+const uiConfig = {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true
+    }
+  ],
+  credentialHelper: 'none',
+  signInFlow: 'popup',
+  callbacks: {
+    // Avoid redirects after sign-in.
+    signInSuccessWithAuthResult: () => false,
+  }
+};
 
 function App() {
   // This is the state of the app, where user journal entries are maintained
@@ -16,6 +35,19 @@ function App() {
   // - a mood rating
   // - a song
   const [entries, modifyEntries] = useState([]);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((firebaseUser) => {
+      // console.log("Logged in as " + firebaseUser.displayName);
+      setUser(firebaseUser);
+    })
+  })
+
+  const handleSignOut = () => {
+    // setErrorMessage(null);
+    firebase.auth().signOut();
+  }
 
   const handleChange = (e) => {
     modifyEntries(e);
@@ -43,9 +75,51 @@ function App() {
     // return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
+  let content = null;
+  if (!user) {
+    content = (
+      <div className="container">
+        <h1>Sign Up</h1>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      </div>
+    )
+  } else {
+    content = (
+      <div>
+        <header className="page-header">
+          <h1><Link to="/">SongNotes</Link></h1>
+          {user &&
+          <button className="btn btn-primary signOutBtn" onClick={handleSignOut}>
+            Log Out {user.displayName}
+          </button>
+          }
+          <NavigationBar />
+        </header>
+
+        <main>
+          <nav className="row">
+            <div className="col-3">
+              <Switch>
+                <Route exact path="/" render={renderJournalLog} />
+                <Route path="/create-entry" render={renderForm} />
+                <Route path="/about-us" component={AboutPage} />
+                <Redirect to="/" />
+              </Switch>
+            </div>
+          </nav>
+          {/* {user &&
+          <button className="btn btn-primary" onClick={handleSignOut}>
+            Log Out {user.displayName}
+          </button>
+          } */}
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div className="App">
-      <header className="page-header">
+      {/* <header className="page-header">
         <h1><Link to="/">SongNotes</Link></h1>
         <NavigationBar />
       </header>
@@ -61,7 +135,8 @@ function App() {
             </Switch>
           </div>
         </nav>
-      </main>
+      </main> */}
+      {content}
 
       <footer>
         <div className="footer-copyright text-center py-3"> &copy; INFO 340 AA -
