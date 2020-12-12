@@ -6,6 +6,7 @@ import AboutPage from './AboutUs.js';
 import Form from './Form.js';
 import JournalLog from './JournalLog.js';
 //import { Button } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import 'firebase/auth';
@@ -36,11 +37,13 @@ function App() {
   // - a song
   const [entries, modifyEntries] = useState([]);
   const [user, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       // console.log("Logged in as " + firebaseUser.displayName);
       setUser(firebaseUser);
+      setIsLoading(false);
     })
   })
 
@@ -73,6 +76,16 @@ function App() {
   const sendUserHome = () => {
     return <Redirect to="/" />
     // return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
+  }
+
+  if (isLoading) {
+    return (
+      <div className="text-center">
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
+    )
   }
 
   let content = null;
