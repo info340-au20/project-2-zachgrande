@@ -81,7 +81,9 @@ function App() {
   if (isLoading) {
     return (
       <div className="text-center">
-        <Spinner color="primary" />
+        <Spinner color="primary">
+        </Spinner>
+        <p>Loading...</p>
       </div>
     )
   }
