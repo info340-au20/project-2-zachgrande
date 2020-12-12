@@ -1,8 +1,17 @@
 import fetchTrack from './Track.js';
 import MoodSelect from './MoodSelect.js';
+import { useState } from 'react';
 
 // Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
+
+  //pass mood from MoodSelect
+  const [moodEntry, setMoodEntry] = useState();
+  const handleMoodInput = (e) => {
+    setMoodEntry(e);
+  }
+  console.log(moodEntry);
+
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
@@ -39,7 +48,7 @@ function Form(prop) {
         postTitle: userTitle,
         date: userDate,
         dayDescription: userBody,
-        //moodRating: moodInput,
+        moodRating: moodEntry,
         artwork: songEntry[0],
         artist: songEntry[1],
         songTitle: songEntry[2]
@@ -76,7 +85,7 @@ function Form(prop) {
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
-          <MoodSelect /> 
+          <MoodSelect moodEntry={handleMoodInput}/> 
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">

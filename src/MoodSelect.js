@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-function MoodSelect() {
-
+function MoodSelect(props) {
+    let moodEntry = props.moodEntry;
     let moodOptions = [
       { id: 'calm', selected: false },
       { id: 'happy', selected: false },
@@ -16,7 +16,8 @@ function MoodSelect() {
       //event.currentTarget.alt = mood + "selected"; 
       setMoodInput(mood);
     }
-    // console.log(moodInput) //need to pass this to the parent component
+    moodEntry(moodInput); //passes moodInput to Form
+
   
     let selectText = "";
     let clickText = "";
@@ -46,6 +47,7 @@ function MoodSelect() {
     })
   
     return (
+      
       <div className="mood-rating">
         {moodButtons}
       </div>
