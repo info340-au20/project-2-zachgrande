@@ -12,6 +12,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import 'firebase/auth';
 import 'firebase/database';
 
+
 const uiConfig = {
   signInOptions: [
     {
@@ -60,8 +61,9 @@ function App() {
     if (entries.length === 0) {
       return (
         <div>
-          <p>You have not created any journal entries!</p>
-          <p>You can create an entry by visiting the <NavLink to="create-entry" className="nav-link" activeClassName={"activeLink"}>Create an Entry</NavLink> tab.</p>
+          <p>You have not created any journal entries! You can create an entry by visiting 
+            <NavLink to="create-entry" className="nav-link" id="mainCAE" activeClassName={"activeLink"}>Create an Entry</NavLink>
+          </p>
         </div>
       )
     } else {
@@ -100,31 +102,27 @@ function App() {
     content = (
       <div>
         <header className="page-header">
-          <h1><Link to="/">SongNotes</Link></h1>
+          <h1><Link to="/" id='title'>SongNotes</Link></h1>
+
+          {/* Logout Button */}
           {user &&
-          <button className="btn btn-primary signOutBtn" onClick={handleSignOut}>
+          <button className="btn btn-secondary signOutBtn" onClick={handleSignOut}>
             Log Out {user.displayName}
           </button>
           }
+
           <NavigationBar />
         </header>
 
         <main>
-          <nav className="row">
-            <div className="col-3">
+          <nav className="container-fluid">
               <Switch>
                 <Route exact path="/" render={renderJournalLog} />
                 <Route path="/create-entry" render={renderForm} />
                 <Route path="/about-us" component={AboutPage} />
                 <Redirect to="/" />
               </Switch>
-            </div>
           </nav>
-          {/* {user &&
-          <button className="btn btn-primary" onClick={handleSignOut}>
-            Log Out {user.displayName}
-          </button>
-          } */}
         </main>
       </div>
     )
@@ -132,29 +130,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* <header className="page-header">
-        <h1><Link to="/">SongNotes</Link></h1>
-        <NavigationBar />
-      </header>
-
-      <main>
-        <nav className="row">
-          <div className="col-3">
-            <Switch>
-              <Route exact path="/" render={renderJournalLog} />
-              <Route path="/create-entry" render={renderForm} />
-              <Route path="/about-us" component={AboutPage} />
-              <Redirect to="/" />
-            </Switch>
-          </div>
-        </nav>
-      </main> */}
       {content}
 
       <footer>
-        <div className="footer-copyright text-center py-3"> &copy; INFO 340 AA -
-            {/* <span role="button" className="about-us" onClick={handleNav}> About Us</span> */}
-          <NavLink exact to="/about-us" className="nav-link-1" activeClassName={"activeLink"}> About Us</NavLink>
+        <div className="footer-copyright text-center py-2"> &copy; INFO 340 AA -
+          <NavLink exact to="/about-us" className="nav-link-1" activeClassName={"activeLink"} id='footerAU'> About Us</NavLink>
         </div>
       </footer>
     </div>

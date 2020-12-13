@@ -1,7 +1,11 @@
 * {
     font-family: 'Roboto', sans-serif;
-    /* background-color: #96ecff; */
     box-sizing: border-box;
+}
+
+#title {
+    color: white;
+    size: 2em;
 }
 
 h1 {
@@ -21,43 +25,37 @@ main {
 }
 
 
-/*section {
-    margin: auto;
-    width: 50%;
-    border: 3px black;
-    padding: 10px;
-}*/
-
-nav {
-    /* position: fixed; */
-    /* top: 0; */
-    left: 0;
-    width: 100%;
-    background-color: #96e8f7;
-    /*Rebecca changed color slightly from #96ecff*/
-    padding: 0.75rem;
+header {
+    background-color: #343a40;
 }
 
+#nav-bar {
+    list-style: none;  
+}
 
-/* nav a {
-    color: white;
-    text-decoration: none;
-} */
+.nav-link:hover{
+    color: gray;
+}
 
-nav li {
+#nav-li {
     display: inline;
-    margin-right: 1rem;
-}
-
-nav ul {
-    margin: 0;
-    padding: 0;
-    padding-top: .5rem;
-    display: inline-block;
-}
-
-.nav-link {
     color: white;
+    line-height: 6px;
+    list-style: none;
+}
+
+#nav-li:hover{
+    color: gray;
+    border-bottom: .4rem solid;
+    border-bottom-color: #008080;
+}
+
+#mainCAE{
+    color: blue;
+}
+
+#mainCAE:hover{
+    color: gray;
 }
 
 button.signOutBtn {
@@ -68,19 +66,33 @@ button.signOutBtn {
     position: absolute;
 }
 
+
+/* footer */
+
 footer {
-    margin: 1rem;
-    /* position: absolute; */
+    background-color: #6c757d;
+    color: white;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 2.5rem;
-    opacity: 50%;
+}
+
+#footerAU{
+    color: white;
+}
+
+#footerAU:hover{
+    color: gray;
 }
 
 .about-us {
-    color: blue;
+    color: white;
 }
 
+#AU-link-button {
+    color: white;
+}
 
 /* search page */
 
@@ -96,39 +108,6 @@ footer {
 
 
 /* calendar page */
-
-button {
-    margin: 0.25rem;
-}
-
-button a {
-    color: white;
-}
-
-button a:hover {
-    color: white;
-}
-
-.calendar {
-    margin: 1rem 1rem;
-    border-radius: 25px;
-    border: 2px solid #7fb8ed;
-    background-color: #7fb8ed;
-}
-
-.calendar h2 {
-    margin-top: 0.7rem;
-    color: white;
-    font-size: 1rem;
-}
-
-.prev,
-.next {
-    color: white;
-    font-size: 0.75rem;
-    padding: 0.25rem;
-}
-
 
 .happy.color {
     background-color: #fdffab;
@@ -160,7 +139,7 @@ button a:hover {
 }
 
 
-/*TEST!*/
+/* Entry Cards */
 .album-test {
     height: 5rem;
     width: 5rem;

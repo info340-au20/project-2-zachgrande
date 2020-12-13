@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom';
 
 function NavigationBar() {
   return (
-    <Navbar bg="primary">
-      <li><NavLink exact to="/" className="nav-link" activeClassName={"activeLink"}>Home</NavLink></li>
-      <li><NavLink to="create-entry" className="nav-link" activeClassName={"activeLink"}>Create an Entry</NavLink></li>
+    <Navbar bg="navbar navbar-dark bg-dark" id="nav-bar">
+      <li><NavLink exact to="/" className="nav-link" id="nav-li" activeClassName={"activeLink"}>Home</NavLink></li>
+      <li><NavLink to="create-entry" className="nav-link" id="nav-li" activeClassName={"activeLink"}>Create an Entry</NavLink></li>
     </Navbar>
   )
 }
