@@ -1,6 +1,9 @@
 import fetchTrack from './Track.js';
 import MoodSelect from './MoodSelect.js';
 import { useState } from 'react';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import { Link } from 'react-router-dom';
+
 
 // Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
@@ -10,11 +13,11 @@ function Form(prop) {
   const handleMoodInput = (e) => {
     setMoodEntry(e);
   }
-  console.log(moodEntry);
 
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
+  //let sendUserHome = prop.completionAction;
 
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
@@ -64,6 +67,7 @@ function Form(prop) {
 
     // The final step of our form, ensure nothing is computed until fetch completes
     fetchTrack(songSearch, finalizeUserInput);
+
   }
 
   return (
@@ -93,7 +97,7 @@ function Form(prop) {
           <span className="glyphicon glyphicon-search"></span>
           <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" />
         </div>
-        <button className="btn btn-primary" id="submit" onClick={handleSubmit}>Done</button>
+  <button className="btn btn-primary" id="submit" onClick={handleSubmit}>Done</button>
       </form>
 
     </section>
