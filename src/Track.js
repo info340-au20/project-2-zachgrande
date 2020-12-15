@@ -4,10 +4,13 @@ function fetchTrack(searchTerm, processData) {
   let url = URL_TEMPLATE.replace("{searchTerm}", searchTerm);
   return fetch(url)
     .then(function (response) {
+      // insert spinning symbol
       return response.json();
     })
     .then(function (data) {
       processData(data);
+      // remove spinning symbol
+      // insert complete message
     })
     .catch(function (error) {
       console.log("No results found.");
