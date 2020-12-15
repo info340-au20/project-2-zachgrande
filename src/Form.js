@@ -57,6 +57,9 @@ function Form(prop) {
         songTitle: songEntry[2]
       });
 
+      // Add a new entry to the database
+      
+
       // Replace the old state
       modifyEntries(newEntriesArray);
       // prop.completionAction();

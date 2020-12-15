@@ -41,12 +41,16 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((firebaseUser) => {
+    const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       // console.log("Logged in as " + firebaseUser.displayName);
       setUser(firebaseUser);
       setIsLoading(false);
     })
-  })
+
+    return function cleanup() {
+      authUnregisterFunction();
+    }
+  }, []) // only run on first load
 
   const handleSignOut = () => {
     // setErrorMessage(null);
@@ -67,7 +71,7 @@ function App() {
         </div>
       )
     } else {
-      return <JournalLog {...routerProps} logs={entries} />
+      return <JournalLog {...routerProps} logs={entries} currentUser={user} />
     }
   }
 
