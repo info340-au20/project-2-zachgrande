@@ -1,6 +1,6 @@
 import fetchTrack from './Track.js';
 import MoodSelect from './MoodSelect.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
@@ -22,6 +22,16 @@ function Form(prop) {
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
   //let sendUserHome = prop.completionAction;
+
+  // MOVED TO JOURNALLOG.JS
+  // useEffect(() => {
+  //   const entryRef = firebase.database().ref('Person A');
+  //   entryRef.on('value', (snapshot) => {
+  //     const theValue = snapshot.val(); // convert to Javascript value
+  //     console.log("Value of database has changed");
+  //     console.log(theValue);
+  //   })
+  // }, [])
 
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
@@ -51,20 +61,33 @@ function Form(prop) {
       // [artwork URL, artist name, song title]
       let songEntry = [searchResults.artworkUrl100, searchResults.artistName, searchResults.trackName];
 
-      // Append an additional entry
-      newEntriesArray.push({
+      const newEntry = {
         postTitle: userTitle,
         date: userDate,
         dayDescription: userBody,
         moodRating: moodEntry,
         artwork: songEntry[0],
         artist: songEntry[1],
-        songTitle: songEntry[2]
-      });
+        songTitle: songEntry[2],
+        time: firebase.database.ServerValue.TIMESTAMP
+      }
+
+      // Append an additional entry
+      newEntriesArray.push(newEntry);
+      // newEntriesArray.push({
+      //   postTitle: userTitle,
+      //   date: userDate,
+      //   dayDescription: userBody,
+      //   moodRating: moodEntry,
+      //   artwork: songEntry[0],
+      //   artist: songEntry[1],
+      //   songTitle: songEntry[2]
+      // });
 
       // ADD A NEW ENTRY TO THE DATABASE
       // Get a reference to the database child
-      // const entryList = firebase.database().child(user.uid);
+      const entryRef = firebase.database().ref('Person A'); // change URL to person's user ID
+      entryRef.push(newEntry);
       // console.log(user);
 
       // Replace the old state
