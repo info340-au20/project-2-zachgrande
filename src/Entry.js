@@ -9,7 +9,7 @@ function Entry(prop) {
         <h2 className="entry-title">{log.postTitle}</h2>
         <p className="date">{log.date}</p>
         {/* <p>{log.dayDescription}</p> */}
-        <Test></Test>
+        {/* <Test></Test> */}
 
       </div>
     </div>

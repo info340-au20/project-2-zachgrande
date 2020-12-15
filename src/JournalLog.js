@@ -1,7 +1,6 @@
 import Entry from './Entry.js';
 
 function JournalLog(prop) {
-  let user = prop.currentUser;
   let count = 0;
   let logList = prop.logs.map((log) => {
     count++;

@@ -36,6 +36,16 @@ function App() {
   // - a description
   // - a mood rating
   // - a song
+  // [
+      // {one entry},
+      // {another entry}
+  // ]
+
+  // [
+    // {user A: [{entry}, {entry}]},
+    // {user B: [{entry}, {entry}]}
+  // ]
+  // const [entries, modifyEntries] = useState({});
   const [entries, modifyEntries] = useState([]);
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -44,13 +54,23 @@ function App() {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
       // console.log("Logged in as " + firebaseUser.displayName);
       setUser(firebaseUser);
+      const userID = firebaseUser.uid;
+      // If our state does NOT contain data for this user
+      // if (!Object.keys(entries).includes(userID)) {
+        // Then make a new key for our user
+        // console.log("Making a new user!");
+        // entries[userID] = [];
+      // }
+      // console.log("Here is our state on load:");
+      // console.log(entries);
       setIsLoading(false);
     })
 
     return function cleanup() {
       authUnregisterFunction();
     }
-  }, []) // only run on first load
+  // }, []) // only run on first load
+  })
 
   const handleSignOut = () => {
     // setErrorMessage(null);
@@ -62,6 +82,13 @@ function App() {
   }
 
   const renderJournalLog = (routerProps) => {
+    const userID = user.uid;
+    // console.log("We're trying to find the journal entry length");
+    // console.log(userID);
+    // console.log(entries[userID]);
+    // console.log(Object.values(entries));
+    // console.log(entries.userID);
+    // if (entries[userID].length === 0) {
     if (entries.length === 0) {
       return (
         <div>
@@ -71,12 +98,15 @@ function App() {
         </div>
       )
     } else {
+      // return <JournalLog {...routerProps} logs={entries[userID]} currentUser={user} />
       return <JournalLog {...routerProps} logs={entries} currentUser={user} />
     }
   }
 
   const renderForm = (routerProps) => {
-    return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
+    const userID = user.uid;
+    return <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
+    // return <Form {...routerProps} entries={entries[userID]} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
   const sendUserHome = () => {

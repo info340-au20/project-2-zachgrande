@@ -3,10 +3,14 @@ import MoodSelect from './MoodSelect.js';
 import { useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 
 // Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
+
+  const user = prop.currentUser;
 
   //pass mood from MoodSelect
   const [moodEntry, setMoodEntry] = useState();
@@ -29,6 +33,7 @@ function Form(prop) {
     let songSearch = document.querySelector('#songSearch').value;
 
     let newEntriesArray = [];
+    console.log(entries);
 
     // Pre-process our existing entries for the new state
     if (entries !== []) {
@@ -57,8 +62,10 @@ function Form(prop) {
         songTitle: songEntry[2]
       });
 
-      // Add a new entry to the database
-      
+      // ADD A NEW ENTRY TO THE DATABASE
+      // Get a reference to the database child
+      // const entryList = firebase.database().child(user.uid);
+      // console.log(user);
 
       // Replace the old state
       modifyEntries(newEntriesArray);

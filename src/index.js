@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import Firebase, {FirebaseContext} from 'firebase/app';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database'; // comment out if unnecessary
+import 'firebase/database';
 
 // <!-- The core Firebase JS SDK is always required and must be listed first -->
 // <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
@@ -36,7 +36,7 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <link rel="manifest" href="./public/manifest.json" />
+    <link rel="manifest" href="../public/manifest.json" />
     <Router history={history}>
       {/* <FirebaseContext.Provider value={new Firebase()}> */}
       <App />
