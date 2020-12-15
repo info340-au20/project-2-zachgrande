@@ -36,7 +36,6 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <link rel="manifest" href="../public/manifest.json" />
     <Router history={history}>
       {/* <FirebaseContext.Provider value={new Firebase()}> */}
       <App />

@@ -33,7 +33,7 @@ function Form(prop) {
     let songSearch = document.querySelector('#songSearch').value;
 
     let newEntriesArray = [];
-    console.log(entries);
+    // console.log(entries);
 
     // Pre-process our existing entries for the new state
     if (entries !== []) {

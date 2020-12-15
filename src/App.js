@@ -11,6 +11,7 @@ import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import 'firebase/auth';
 import 'firebase/database';
+import { Helmet } from 'react-helmet';
 
 
 const uiConfig = {
@@ -37,13 +38,13 @@ function App() {
   // - a mood rating
   // - a song
   // [
-      // {one entry},
-      // {another entry}
+  // {one entry},
+  // {another entry}
   // ]
 
   // [
-    // {user A: [{entry}, {entry}]},
-    // {user B: [{entry}, {entry}]}
+  // {user A: [{entry}, {entry}]},
+  // {user B: [{entry}, {entry}]}
   // ]
   // const [entries, modifyEntries] = useState({});
   const [entries, modifyEntries] = useState([]);
@@ -57,9 +58,9 @@ function App() {
       const userID = firebaseUser.uid;
       // If our state does NOT contain data for this user
       // if (!Object.keys(entries).includes(userID)) {
-        // Then make a new key for our user
-        // console.log("Making a new user!");
-        // entries[userID] = [];
+      // Then make a new key for our user
+      // console.log("Making a new user!");
+      // entries[userID] = [];
       // }
       // console.log("Here is our state on load:");
       // console.log(entries);
@@ -69,7 +70,7 @@ function App() {
     return function cleanup() {
       authUnregisterFunction();
     }
-  // }, []) // only run on first load
+    // }, []) // only run on first load
   })
 
   const handleSignOut = () => {
@@ -92,7 +93,7 @@ function App() {
     if (entries.length === 0) {
       return (
         <div>
-          <p>You have not created any journal entries! You can create an entry by visiting 
+          <p>You have not created any journal entries! You can create an entry by visiting
             <NavLink to="create-entry" className="nav-link" id="mainCAE" activeClassName={"activeLink"}>Create an Entry</NavLink>
           </p>
         </div>
@@ -140,9 +141,9 @@ function App() {
 
           {/* Logout Button */}
           {user &&
-          <button className="btn btn-secondary signOutBtn" onClick={handleSignOut}>
-            Log Out {user.displayName}
-          </button>
+            <button className="btn btn-secondary signOutBtn" onClick={handleSignOut}>
+              Log Out {user.displayName}
+            </button>
           }
 
           <NavigationBar />
@@ -150,12 +151,12 @@ function App() {
 
         <main>
           <nav className="container-fluid">
-              <Switch>
-                <Route exact path="/" render={renderJournalLog} />
-                <Route path="/create-entry" render={renderForm} />
-                <Route path="/about-us" component={AboutPage} />
-                <Redirect to="/" />
-              </Switch>
+            <Switch>
+              <Route exact path="/" render={renderJournalLog} />
+              <Route path="/create-entry" render={renderForm} />
+              <Route path="/about-us" component={AboutPage} />
+              <Redirect to="/" />
+            </Switch>
           </nav>
         </main>
       </div>
@@ -164,6 +165,13 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>SongNotes</title>
+        <meta name="author" content="INFO 340 AA" />
+        <meta name="description" content="A Journaling App with Music" />
+      </Helmet>
+
       {content}
 
       <footer>
