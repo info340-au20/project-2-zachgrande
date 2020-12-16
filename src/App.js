@@ -83,14 +83,14 @@ function App() {
   }
 
   useEffect(() => {
-    const entryRef = firebase.database().ref('Person A');
+    const entryRef = firebase.database().ref('entries');
     entryRef.on('value', (snapshot) => {
       // If our entries array is empty, then we can't iterate over empty keys
       // This conditional will ensure we skip the following if there are no entries
       // console.log(entries);
-      if (entries.length === 0) {
-        return null;
-      }
+      // if (entries.length === 0) {
+      //   return null;
+      // }
       const entriesObj = snapshot.val(); // convert to Javascript value
       // console.log("Value of database has changed");
       // console.log(entriesObj);
@@ -101,7 +101,7 @@ function App() {
         singleEntryObj.key = key // IMPORTANT
         return singleEntryObj;
       })
-      // console.log(entriesArray);
+      console.log(entriesArray);
       modifyEntries(entriesArray);
     })
   }, [])

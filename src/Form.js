@@ -34,7 +34,7 @@ function Form(prop) {
 let handleInput = (event) => {
     const value = event.target.value;
     const name = event.target.id;
-    console.log(name, value);
+    // console.log(name, value);
     
     //entryObj[name] = value; 
 }
@@ -113,7 +113,7 @@ let handleInput = (event) => {
 
       // ADD A NEW ENTRY TO THE DATABASE
       // Get a reference to the database child
-      const entryRef = firebase.database().ref('Person A'); // change URL to person's user ID
+      const entryRef = firebase.database().ref('entries'); // change URL to person's user ID
       entryRef.push(newEntry);
       // console.log(user);
 
