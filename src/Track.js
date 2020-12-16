@@ -2,7 +2,7 @@
 const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
 function fetchTrack(searchTerm, processData) {
   let url = URL_TEMPLATE.replace("{searchTerm}", searchTerm);
-  togglerSpinner();
+  // togglerSpinner();
   return fetch(url)
     .then(function (response) {
       // insert spinning symbol
@@ -15,13 +15,13 @@ function fetchTrack(searchTerm, processData) {
     })
     .catch(function (error) {
       console.log("No results found.");
-      renderError(error);
+      // renderError(error);
       console.log(error);
     })
-    .then(togglerSpinner);
+    // .then(togglerSpinner);
 }
 
-function togglerSpinner() {
+/*function togglerSpinner() {
     let spinnerBox = document.querySelector('.song-loading-spinner');
 
     if(spinnerBox.classList.contains("disabled")){
@@ -41,7 +41,7 @@ function renderError(error) {
     // console.log(err.message);
     message.innerText = error.message;
     document.querySelector(".errors").appendChild(message);
-}
+}*/
 
 
 

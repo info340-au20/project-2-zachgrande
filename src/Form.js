@@ -5,7 +5,7 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { Spinner } from 'reactstrap';
+// import { Spinner } from 'reactstrap';
 
 // Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
