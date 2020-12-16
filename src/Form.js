@@ -95,7 +95,8 @@ let handleInput = (event) => {
         artwork: songEntry[0],
         artist: songEntry[1],
         songTitle: songEntry[2],
-        time: firebase.database.ServerValue.TIMESTAMP
+        time: firebase.database.ServerValue.TIMESTAMP,
+        user: user.uid
       }
       //console.log(newEntry);
 

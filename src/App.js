@@ -88,20 +88,26 @@ function App() {
       // If our entries array is empty, then we can't iterate over empty keys
       // This conditional will ensure we skip the following if there are no entries
       // console.log(entries);
-      // if (entries.length === 0) {
-      //   return null;
-      // }
       const entriesObj = snapshot.val(); // convert to Javascript value
+      // if (entries.length === 0) {
+      if (entriesObj === null) {
+        modifyEntries([]);
+        return null;
+      }
+      // const entriesObj = snapshot.val(); // convert to Javascript value
       // console.log("Value of database has changed");
       // console.log(entriesObj);
       // The resulting array allows us to render the entries as an array
+      // if (entriesObj === undefined) {
+        // entriesObj = {};
+      // }
       let objectKeys = Object.keys(entriesObj);
       let entriesArray = objectKeys.map((key) => {
         let singleEntryObj = entriesObj[key];
         singleEntryObj.key = key // IMPORTANT
         return singleEntryObj;
       })
-      console.log(entriesArray);
+      // console.log(entriesArray);
       modifyEntries(entriesArray);
     })
   }, [])
