@@ -8,8 +8,8 @@ import 'firebase/database';
 
 // Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
-  const user = prop.currentUser;
   // Establish our variables from the prop
+  const user = prop.currentUser;
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
   let formValid = prop.formValid;
@@ -27,30 +27,27 @@ function Form(prop) {
     {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
   ]
   //const [formState, setFormState] = useState(entryFormArray);
-
-  //const [entryInput, setEntryInput] = useState(entryObj)
-  let handleInput = (event) => {
-    const inputValue = event.target.value;
-    const inputName = event.target.id;
-    entryObj[inputName] = inputValue; 
-    console.log(entryObj);
-    entryFormArray = [
-      {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
-      {input: entryObj.inputDate, id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
-      {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
-      {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
-    ]
-    //console.log(entryFormArray);
-    //MakeForm();
-
-  }
-  //console.log(entryFormArray);
  
   //base appearance of form without error checks  
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isInvalid, setIsInvalid] = useState(true);
 
   function MakeForm() {
+    let handleInput = (event) => {
+      const inputValue = event.target.value;
+      const inputName = event.target.id;
+      entryObj[inputName] = inputValue; 
+      console.log(entryObj);
+      entryFormArray = [
+        {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
+        {input: entryObj.inputDate, id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
+        {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
+        {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
+      ]
+      //console.log(entryFormArray);
+      //MakeForm();
+  
+    }
     
     let allForm = entryFormArray.map((obj) => {
       if (obj.id === "inputDescription"){
@@ -102,9 +99,7 @@ function Form(prop) {
 
 
 
-  /*let errorMessage = '';
-  let validation = '';
-  let feedbackClasses = '';*/
+  
   let isDisabled = '';
   let error = false;
 
@@ -113,40 +108,20 @@ function Form(prop) {
   let handleSubmit = (event) => {
     event.preventDefault();
     setIsSubmitted(true);
-    //setEntryInput(entryObj);
-    //console.log(Object.entries(entryInput));
 
     //error handling
-    //props.submit = true;
-    Object.entries(entryObj).map((array) => {
-      let key = array[0];
-      let value = array[1];
-      let keyName = key.replace("input", "").toLowerCase();
-      if(value === '') {
+    entryFormArray.map((obj) => {
+      if(obj.input === '') {
         formValid(false);
         setIsInvalid(true);
-        /*validation = 'is-invalid';
-        feedbackClasses = 'invalid-feedback';
-        errorMessage = 'Please provide a ' + keyName + '.';*/
       } else {
         formValid(true);
         setIsInvalid(false);
-
-        /*validation = 'is-valid';
-        feedbackClasses = 'valid-feedback';
-        errorMessage = '';*/
       }
-      
     })
 
 
-    /*let userTitle = document.querySelector("#inputTitle").value;
-    let userDate = document.querySelector("#inputDate").value;
-    let userBody = document.querySelector("#inputDescription").value;
-    let inputSong = document.querySelector('#inputSong').value;*/
-
     let newEntriesArray = [];
-    // console.log(entries);
 
     // Pre-process our existing entries for the new state
     if (entries !== []) {
