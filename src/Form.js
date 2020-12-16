@@ -20,55 +20,91 @@ function Form(prop) {
     inputDescription: '',
     inputSong: '',
   }
- 
-  //base appearance of form without error checks  
-  function MakeForm() {
-    /*Object.keys(entryObj).map((string) => {
-      let keyName = string.replace("input", "");
-      return (
-        <div className={string}>
-          <label htmlFor={string}>Post Title</label>
-          <input type="text" className="form-control form-control-lg" id={string} aria-label={"Entry " + keyName} placeholder="What do you want to title this post?" onChange={handleInput} />
-        </div>
-      )
-    })*/
-    return (
-      <div>
-        <div className="form-group">
-          <label htmlFor="inputTitle">Post Title</label>
-          <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" onChange={handleInput} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputDate">Day</label>
-          <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required onChange={handleInput} />
-          <div id="dateFeedback" className="invalid-feedback"></div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputDescription">How was your day?</label>
-          <textarea className="form-control" id="inputDescription" rows="3" onChange={handleInput}></textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputSong">Search for Today's Song</label>
-          <span className="glyphicon glyphicon-search"></span>
-          <input className="form-control" type="text" id="inputSong" placeholder="Search" aria-label="Search" onChange={handleInput} />
-        </div>
-    </div>
-    )
-  }
+  let entryFormArray = [
+    {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
+    {input: entryObj.inputDate, id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
+    {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
+    {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
+  ]
+  //const [formState, setFormState] = useState(entryFormArray);
 
-  
   //const [entryInput, setEntryInput] = useState(entryObj)
   let handleInput = (event) => {
     const inputValue = event.target.value;
     const inputName = event.target.id;
     entryObj[inputName] = inputValue; 
+    console.log(entryObj);
+    entryFormArray = [
+      {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
+      {input: entryObj.inputDate, id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
+      {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
+      {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
+    ]
+    //console.log(entryFormArray);
+    //MakeForm();
+
+  }
+  //console.log(entryFormArray);
+ 
+  //base appearance of form without error checks  
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isInvalid, setIsInvalid] = useState(true);
+
+  function MakeForm() {
+    
+    let allForm = entryFormArray.map((obj) => {
+      if (obj.id === "inputDescription"){
+        return (
+          <div className="form-group">
+            <label htmlFor={obj.id}>{obj.label}</label>
+            <textarea className="form-control form-control-lg" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+          </div>
+        )
+      } else {
+        if(!isSubmitted) {
+          return (
+            <div className="form-group">
+              <label htmlFor={obj.id}>{obj.label}</label>
+              <input type={obj.type} className="form-control form-control-lg" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
+            </div>
+          ) 
+        }
+        if(isSubmitted && isInvalid){
+          return (
+            <div className="form-group">
+              <label htmlFor={obj.id}>{obj.label}</label>
+              <input type={obj.type} className="form-control form-control-lg is-invalid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
+              <div class="invalid-feedback">Please provide a {obj.name}.</div>
+            </div>
+          )
+        } 
+        if(isSubmitted && !isInvalid){
+          return (
+            <div className="form-group">
+              <label htmlFor={obj.id}>{obj.label}</label>
+              <input type={obj.type} className="form-control form-control-lg is-valid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
+            </div>
+          )      
+        } 
+      }
+    })
+    console.log(entryFormArray);
+
+    return (
+      <div>
+       {allForm} 
+      </div>
+    )
   }
 
+  
+  
 
 
-  let errorMessage = '';
+
+  /*let errorMessage = '';
   let validation = '';
-  let feedbackClasses = '';
+  let feedbackClasses = '';*/
   let isDisabled = '';
   let error = false;
 
@@ -76,26 +112,29 @@ function Form(prop) {
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
-    
+    setIsSubmitted(true);
     //setEntryInput(entryObj);
     //console.log(Object.entries(entryInput));
 
     //error handling
-    
+    //props.submit = true;
     Object.entries(entryObj).map((array) => {
       let key = array[0];
       let value = array[1];
       let keyName = key.replace("input", "").toLowerCase();
       if(value === '') {
         formValid(false);
-        validation = 'is-invalid';
+        setIsInvalid(true);
+        /*validation = 'is-invalid';
         feedbackClasses = 'invalid-feedback';
-        errorMessage = 'Please provide a ' + keyName + '.';
+        errorMessage = 'Please provide a ' + keyName + '.';*/
       } else {
         formValid(true);
-        validation = 'is-valid';
+        setIsInvalid(false);
+
+        /*validation = 'is-valid';
         feedbackClasses = 'valid-feedback';
-        errorMessage = '';
+        errorMessage = '';*/
       }
       
     })
