@@ -66,24 +66,24 @@ function Form(prop) {
     //console.log(Object.entries(entryInput));
 
     //error handling
-    /*
+    
     Object.entries(entryInput).map((array) => {
       let key = array[0];
       let value = array[1];
       let keyName = key.replace("input", "").toLowerCase();
       if(value === '') {
-        formValid = false;
+        formValid(false);
         validation = 'is-invalid';
         feedbackClasses = 'invalid-feedback';
         errorMessage = 'Please provide a ' + keyName + '.';
       } else {
-        formValid = true;
+        formValid(true);
         validation = 'is-valid';
         feedbackClasses = 'valid-feedback';
         errorMessage = '';
       }
       
-    })*/
+    })
 
 
     /*let userTitle = document.querySelector("#inputTitle").value;
