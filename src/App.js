@@ -5,6 +5,7 @@ import NavigationBar from './NavigationBar.js';
 import AboutPage from './AboutUs.js';
 import Form from './Form.js';
 import JournalLog from './JournalLog.js';
+import Expand from './Expand.js'
 //import { Button } from 'reactstrap';
 import { Spinner } from 'reactstrap';
 import firebase from 'firebase/app';
@@ -195,6 +196,7 @@ function App() {
               <Route exact path="/" render={renderJournalLog} />
               <Route path="/create-entry" render={renderForm} />
               <Route path="/about-us" component={AboutPage} />
+              <Route path="/post/:timeStamp" component={Expand} />
               <Redirect to="/" />
             </Switch>
           </nav>
