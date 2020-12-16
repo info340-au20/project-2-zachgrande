@@ -72,23 +72,19 @@ function Form(prop) {
       let value = array[1];
       let keyName = key.replace("input", "").toLowerCase();
       if(value === '') {
-        error = true;
+        formValid = false;
         validation = 'is-invalid';
         feedbackClasses = 'invalid-feedback';
         errorMessage = 'Please provide a ' + keyName + '.';
       } else {
+        formValid = true;
         validation = 'is-valid';
         feedbackClasses = 'valid-feedback';
         errorMessage = '';
       }
       
-    })
+    })*/
 
-    if (error) {
-      isDisabled = "disabled";
-    } else {
-      isDisabled = "";
-    }*/
 
     /*let userTitle = document.querySelector("#inputTitle").value;
     let userDate = document.querySelector("#inputDate").value;
