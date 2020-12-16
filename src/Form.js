@@ -5,7 +5,7 @@ import { propTypes } from 'react-bootstrap/esm/Image';
 import { Link } from 'react-router-dom';
 import firebase from 'firebase/app';
 import 'firebase/database';
-
+import { Spinner } from 'reactstrap';
 
 // Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
@@ -122,7 +122,7 @@ function Form(prop) {
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
-          <MoodSelect moodEntry={handleMoodInput}/> 
+          <MoodSelect moodEntry={handleMoodInput}/>
           <div id="moodFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
@@ -131,6 +131,10 @@ function Form(prop) {
           <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" />
         </div>
   <button className="btn btn-primary" id="submit" onClick={handleSubmit}>Done</button>
+  <div className="song-loading-spinner disabled">
+  </div>
+  <div className="errors">
+  </div>
       </form>
 
     </section>
