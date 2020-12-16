@@ -18,6 +18,30 @@ function Form(prop) {
     setMoodEntry(e);
   }
 
+/*
+  const entryObj = {
+    inputTitle: '',
+    inputDate: '',
+    inputBody: '',
+    songSearch: ''/*,
+    artwork: songEntry[0],
+    artist: songEntry[1],
+    songTitle: songEntry[2],
+    time: firebase.database.ServerValue.TIMESTAMP*/
+  //}
+
+
+let handleInput = (event) => {
+    const value = event.target.value;
+    const name = event.target.id;
+    // console.log(name, value);
+    
+    //entryObj[name] = value; 
+}
+//console.log(entryObj);
+
+
+
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
@@ -32,6 +56,8 @@ function Form(prop) {
   //     console.log(theValue);
   //   })
   // }, [])
+
+
 
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
@@ -62,15 +88,16 @@ function Form(prop) {
       let songEntry = [searchResults.artworkUrl100, searchResults.artistName, searchResults.trackName];
 
       const newEntry = {
-        postTitle: userTitle,
-        date: userDate,
-        dayDescription: userBody,
+        postTitle: userTitle /*entryObj.inputTitle*/,
+        date: userDate /*entryObj.inputeDate*/,
+        dayDescription: userBody /*entryObj.inputBody*/,
         moodRating: moodEntry,
         artwork: songEntry[0],
         artist: songEntry[1],
         songTitle: songEntry[2],
         time: firebase.database.ServerValue.TIMESTAMP
       }
+      //console.log(newEntry);
 
       // Append an additional entry
       newEntriesArray.push(newEntry);
@@ -86,12 +113,14 @@ function Form(prop) {
 
       // ADD A NEW ENTRY TO THE DATABASE
       // Get a reference to the database child
-      const entryRef = firebase.database().ref('Person A'); // change URL to person's user ID
+      const entryRef = firebase.database().ref('entries'); // change URL to person's user ID
       entryRef.push(newEntry);
       // console.log(user);
 
       // Replace the old state
-      modifyEntries(newEntriesArray);
+      // BRING BACK THE NEXT LINE -- ZACH
+      // modifyEntries(newEntriesArray);
+      
       // prop.completionAction();
       // <Route exact path="/" />
       // console.log(prop.router);
@@ -109,16 +138,16 @@ function Form(prop) {
       <form>
         <div className="form-group">
           <label htmlFor="inputTitle">Post Title</label>
-          <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" />
+          <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" onChange={handleInput} />
         </div>
         <div className="form-group">
           <label htmlFor="inputDate">Day</label>
-          <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required />
+          <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required onChange={handleInput} />
           <div id="dateFeedback" className="invalid-feedback"></div>
         </div>
         <div className="form-group">
           <label htmlFor="inputBody">How was your day?</label>
-          <textarea className="form-control" id="inputBody" rows="3"></textarea>
+          <textarea className="form-control" id="inputBody" rows="3" onChange={handleInput}></textarea>
         </div>
         <div className="form-group">
           <p role="label">Today's Mood Rating</p>
@@ -128,7 +157,7 @@ function Form(prop) {
         <div className="form-group">
           <label htmlFor="songSearch">Search for Today's Song</label>
           <span className="glyphicon glyphicon-search"></span>
-          <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" />
+          <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" onChange={handleInput} />
         </div>
   <button className="btn btn-primary" id="submit" onClick={handleSubmit}>Done</button>
   <div className="song-loading-spinner disabled">
