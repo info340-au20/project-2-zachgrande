@@ -1,5 +1,5 @@
 import fetchTrack from './Track.js';
-import MoodSelect from './MoodSelect.js';
+//import MoodSelect from './MoodSelect.js';
 import { useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { Link, withRouter } from 'react-router-dom';
@@ -38,6 +38,8 @@ function Form(prop) {
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
+  let formValid = prop.formValid;
+
 
   // MOVED TO JOURNALLOG.JS
   // useEffect(() => {

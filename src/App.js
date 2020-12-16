@@ -153,22 +153,43 @@ function App() {
     setMoodEntry(e);
   }
   console.log(moodEntry);
+  
   const renderMoodSelect = (routerProps) => {
+    function MoodErrorCheck() {
+      if(moodEntry === undefined){
+        return (<button type="button" class="btn btn-lg btn-secondary" disabled><Link to="/form" onClick={e => e.preventDefault()}>Continue</Link></button>)
+      } else {
+        return (<button type="button" class="btn btn-lg btn-secondary"><Link to="/form">Continue</Link></button>)
+      }
+    }
     return (
       <div className="form-group">
         <p role="label">Please select a mood for the entry color scheme:</p>
         <MoodSelect {...routerProps} moodEntry={handleMoodInput}/>
         <div id="moodFeedback" className="invalid-feedback"></div>
-        <p><Link to="/form">Continue</Link></p> 
+        <MoodErrorCheck />
       </div>
     )
   }
   
+  const [formValid, setFormValidity] = useState();
+  const handleFormValidation = (e) => {
+    setFormValidity(e);
+  }
+  console.log(formValid);
   const renderForm = (routerProps) => {
+    function FormErrorCheck() {
+      if(formValid === false){
+        return (<button type="button" class="btn btn-lg btn-secondary" disabled><Link to="/" onClick={e => e.preventDefault()}>Home</Link></button>)
+      } else {
+        return (<button type="button" class="btn btn-lg btn-secondary"><Link to="/">Home</Link></button>)
+      }
+    }
     return (
       <div>
-        <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} mood={moodEntry}/>
-        <p><Link to="/">go to home</Link></p> 
+        <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} mood={moodEntry} formValid={handleFormValidation}/>
+        {/*<p><Link to="/">go to home</Link></p>*/}
+        <FormErrorCheck /> 
       </div>
     )
     // return <Form {...routerProps} entries={entries[userID]} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
