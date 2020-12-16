@@ -118,7 +118,9 @@ let handleInput = (event) => {
       // console.log(user);
 
       // Replace the old state
-      modifyEntries(newEntriesArray);
+      // BRING BACK THE NEXT LINE -- ZACH
+      // modifyEntries(newEntriesArray);
+      
       // prop.completionAction();
       // <Route exact path="/" />
       // console.log(prop.router);
