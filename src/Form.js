@@ -121,7 +121,7 @@ function Form(prop) {
         time: firebase.database.ServerValue.TIMESTAMP,
         user: user.uid
       }
-      //console.log(newEntry);
+      console.log(newEntry);
 
       // Append an additional entry
       newEntriesArray.push(newEntry);

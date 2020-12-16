@@ -151,9 +151,7 @@ function App() {
   const [moodEntry, setMoodEntry] = useState();
   const handleMoodInput = (e) => {
     setMoodEntry(e);
-  }
-  console.log(moodEntry);
-  
+  }  
   const renderMoodSelect = (routerProps) => {
     function MoodErrorCheck() {
       if(moodEntry === undefined){
@@ -176,7 +174,6 @@ function App() {
   const handleFormValidation = (e) => {
     setFormValidity(e);
   }
-  console.log(formValid);
   const renderForm = (routerProps) => {
     function FormErrorCheck() {
       if(formValid === false){
