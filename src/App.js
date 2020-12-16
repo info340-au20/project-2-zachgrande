@@ -5,6 +5,7 @@ import NavigationBar from './NavigationBar.js';
 import AboutPage from './AboutUs.js';
 import Form from './Form.js';
 import JournalLog from './JournalLog.js';
+import MoodSelect from './MoodSelect.js';
 import Expand from './Expand.js'
 //import { Button } from 'reactstrap';
 import { Spinner } from 'reactstrap';
@@ -146,10 +147,34 @@ function App() {
     }
   }
 
+  //pass mood from MoodSelect
+  const [moodEntry, setMoodEntry] = useState();
+  const handleMoodInput = (e) => {
+    setMoodEntry(e);
+  }
+  console.log(moodEntry);
+  const renderMoodSelect = (routerProps) => {
+    return (
+      <div className="form-group">
+        <p role="label">Please select a mood for the entry color scheme:</p>
+        <MoodSelect {...routerProps} moodEntry={handleMoodInput}/>
+        <div id="moodFeedback" className="invalid-feedback"></div>
+        <p><Link to="/form">Continue</Link></p> 
+      </div>
+    )
+  }
+  
   const renderForm = (routerProps) => {
-    return <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
+    return (
+      <div>
+        <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} mood={moodEntry}/>
+        <p><Link to="/">go to home</Link></p> 
+      </div>
+    )
     // return <Form {...routerProps} entries={entries[userID]} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
+
+
 
   const sendUserHome = () => {
     return <Redirect to="/" />
@@ -194,7 +219,8 @@ function App() {
           <nav className="container-fluid">
             <Switch>
               <Route exact path="/" render={renderJournalLog} />
-              <Route path="/create-entry" render={renderForm} />
+              <Route path="/create-entry" render={renderMoodSelect} />
+              <Route path="/form" render={renderForm} />
               <Route path="/about-us" component={AboutPage} />
               <Route path="/post/:timeStamp" component={Expand} />
               <Redirect to="/" />

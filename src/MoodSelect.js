@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 function MoodSelect(props) {
+    //let currentData = props.currentData;
     let moodEntry = props.moodEntry;
     let moodOptions = [
       { id: 'calm', selected: false },

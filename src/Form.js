@@ -2,7 +2,8 @@ import fetchTrack from './Track.js';
 import MoodSelect from './MoodSelect.js';
 import { useEffect, useState } from 'react';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { useHistory } from "react-router";
 import firebase from 'firebase/app';
 import 'firebase/database';
 // import { Spinner } from 'reactstrap';
@@ -12,40 +13,31 @@ function Form(prop) {
 
   const user = prop.currentUser;
 
-  //pass mood from MoodSelect
+  /*//pass mood from MoodSelect 
+  //MOVED to App.js
   const [moodEntry, setMoodEntry] = useState();
   const handleMoodInput = (e) => {
+    
     setMoodEntry(e);
   }
+  console.log(moodEntry);*/
 
-/*
-  const entryObj = {
+  let entryObj = {
     inputTitle: '',
     inputDate: '',
-    inputBody: '',
-    songSearch: ''/*,
-    artwork: songEntry[0],
-    artist: songEntry[1],
-    songTitle: songEntry[2],
-    time: firebase.database.ServerValue.TIMESTAMP*/
-  //}
-
-
-let handleInput = (event) => {
-    const value = event.target.value;
-    const name = event.target.id;
-    // console.log(name, value);
-    
-    //entryObj[name] = value; 
-}
-//console.log(entryObj);
-
-
+    inputDescription: '',
+    inputSong: '',
+  }
+  const [entryInput, setEntryInput] = useState(entryObj)
+  let handleInput = (event) => {
+    const inputValue = event.target.value;
+    const inputName = event.target.id;
+    entryObj[inputName] = inputValue; 
+  }
 
   // Establish our variables from the prop
   let entries = prop.entries;
   let modifyEntries = prop.modifyEntries;
-  //let sendUserHome = prop.completionAction;
 
   // MOVED TO JOURNALLOG.JS
   // useEffect(() => {
@@ -57,16 +49,49 @@ let handleInput = (event) => {
   //   })
   // }, [])
 
+  let errorMessage = '';
+  let validation = '';
+  let feedbackClasses = '';
+  let isDisabled = '';
+  let error = false;
 
 
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
+    
+    setEntryInput(entryObj);
+    //console.log(Object.entries(entryInput));
 
-    let userTitle = document.querySelector("#inputTitle").value;
+    //error handling
+    /*
+    Object.entries(entryInput).map((array) => {
+      let key = array[0];
+      let value = array[1];
+      let keyName = key.replace("input", "").toLowerCase();
+      if(value === '') {
+        error = true;
+        validation = 'is-invalid';
+        feedbackClasses = 'invalid-feedback';
+        errorMessage = 'Please provide a ' + keyName + '.';
+      } else {
+        validation = 'is-valid';
+        feedbackClasses = 'valid-feedback';
+        errorMessage = '';
+      }
+      
+    })
+
+    if (error) {
+      isDisabled = "disabled";
+    } else {
+      isDisabled = "";
+    }*/
+
+    /*let userTitle = document.querySelector("#inputTitle").value;
     let userDate = document.querySelector("#inputDate").value;
-    let userBody = document.querySelector("#inputBody").value;
-    let songSearch = document.querySelector('#songSearch').value;
+    let userBody = document.querySelector("#inputDescription").value;
+    let inputSong = document.querySelector('#inputSong').value;*/
 
     let newEntriesArray = [];
     // console.log(entries);
@@ -88,10 +113,10 @@ let handleInput = (event) => {
       let songEntry = [searchResults.artworkUrl100, searchResults.artistName, searchResults.trackName];
 
       const newEntry = {
-        postTitle: userTitle /*entryObj.inputTitle*/,
-        date: userDate /*entryObj.inputeDate*/,
-        dayDescription: userBody /*entryObj.inputBody*/,
-        moodRating: moodEntry,
+        postTitle: entryInput.inputTitle,
+        date: entryInput.inputDate,
+        dayDescription: entryInput.inputDescription,
+        moodRating: prop.mood,
         artwork: songEntry[0],
         artist: songEntry[1],
         songTitle: songEntry[2],
@@ -129,7 +154,7 @@ let handleInput = (event) => {
     }
 
     // The final step of our form, ensure nothing is computed until fetch completes
-    fetchTrack(songSearch, finalizeUserInput);
+    fetchTrack(entryInput.inputSong, finalizeUserInput);
 
   }
 
@@ -139,28 +164,32 @@ let handleInput = (event) => {
       <form>
         <div className="form-group">
           <label htmlFor="inputTitle">Post Title</label>
-          <input type="text" className="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" onChange={handleInput} />
+          <input type="text" className={"form-control form-control-lg " + validation} id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?" onChange={handleInput} />
+          <div class={"titleError " + feedbackClasses}>{errorMessage}</div>
         </div>
         <div className="form-group">
           <label htmlFor="inputDate">Day</label>
-          <input type="date" id="inputDate" className="form-control form-control-lg" aria-label="Date" required onChange={handleInput} />
+          <input type="date" id="inputDate" className={"form-control form-control-lg " + validation} aria-label="Date" required onChange={handleInput} />
           <div id="dateFeedback" className="invalid-feedback"></div>
+          <div class={"dateError " + feedbackClasses}>{errorMessage}</div>
         </div>
         <div className="form-group">
-          <label htmlFor="inputBody">How was your day?</label>
-          <textarea className="form-control" id="inputBody" rows="3" onChange={handleInput}></textarea>
+          <label htmlFor="inputDescription">How was your day?</label>
+          <textarea className={"form-control " + validation} id="inputDescription" rows="3" onChange={handleInput}></textarea>
+          <div class={"descriptionError " + feedbackClasses}>{errorMessage}</div>
         </div>
-        <div className="form-group">
+        {/*<div className="form-group">
           <p role="label">Today's Mood Rating</p>
           <MoodSelect moodEntry={handleMoodInput}/>
           <div id="moodFeedback" className="invalid-feedback"></div>
-        </div>
+        </div>*/}
         <div className="form-group">
-          <label htmlFor="songSearch">Search for Today's Song</label>
+          <label htmlFor="inputSong">Search for Today's Song</label>
           <span className="glyphicon glyphicon-search"></span>
-          <input className="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search" onChange={handleInput} />
+          <input className={"form-control " + validation} type="text" id="inputSong" placeholder="Search" aria-label="Search" onChange={handleInput} />
+          <div class={"songError " + feedbackClasses}>{errorMessage}</div>
         </div>
-  <button className="btn btn-primary" id="submit" onClick={handleSubmit}>Done</button>
+  <button className={"btn btn-primary " + isDisabled} id="submit" onClick={handleSubmit} aria-disabled={error}>Done</button>
   <div className="song-loading-spinner disabled">
   </div>
   <div className="errors">
@@ -171,4 +200,4 @@ let handleInput = (event) => {
   )
 }
 
-export default Form;
+export default withRouter(Form);
