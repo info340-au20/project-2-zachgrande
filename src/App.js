@@ -155,9 +155,9 @@ function App() {
   const renderMoodSelect = (routerProps) => {
     function MoodErrorCheck() {
       if(moodEntry === undefined){
-        return (<button type="button" class="btn btn-lg btn-secondary" disabled><Link to="/form" onClick={e => e.preventDefault()}>Continue</Link></button>)
+        return (<button type="button" className="btn btn-lg btn-secondary" disabled><Link to="/form" onClick={e => e.preventDefault()}>Continue</Link></button>)
       } else {
-        return (<button type="button" class="btn btn-lg btn-secondary"><Link to="/form">Continue</Link></button>)
+        return (<button type="button" className="btn btn-lg btn-secondary"><Link to="/form">Continue</Link></button>)
       }
     }
     return (
@@ -177,9 +177,9 @@ function App() {
   const renderForm = (routerProps) => {
     function FormErrorCheck() {
       if(formValid === false){
-        return (<button type="button" class="btn btn-lg btn-secondary" disabled><Link to="/" onClick={e => e.preventDefault()}>Home</Link></button>)
+        return (<button type="button" className="btn btn-lg btn-secondary" disabled><Link to="/" onClick={e => e.preventDefault()}>Home</Link></button>)
       } else {
-        return (<button type="button" class="btn btn-lg btn-secondary"><Link to="/">Home</Link></button>)
+        return (<button type="button" className="btn btn-lg btn-secondary"><Link to="/">Home</Link></button>)
       }
     }
     return (

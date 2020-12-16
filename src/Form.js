@@ -29,10 +29,13 @@ function Form(prop) {
   //const [formState, setFormState] = useState(entryFormArray);
  
   //base appearance of form without error checks  
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isInvalid, setIsInvalid] = useState(true);
+  //const [isSubmitted, setIsSubmitted] = useState(false);
+  let isSubmitted = false;
+  //const [isInvalid, setIsInvalid] = useState(true);
+  let isInvalid = true;
 
   function MakeForm() {
+    //const makeForm = () => {
     let handleInput = (event) => {
       const inputValue = event.target.value;
       const inputName = event.target.id;
@@ -52,7 +55,7 @@ function Form(prop) {
     let allForm = entryFormArray.map((obj) => {
       if (obj.id === "inputDescription"){
         return (
-          <div className="form-group">
+          <div className="form-group" key="description">
             <label htmlFor={obj.id}>{obj.label}</label>
             <textarea className="form-control form-control-lg" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
           </div>
@@ -60,7 +63,7 @@ function Form(prop) {
       } else {
         if(!isSubmitted) {
           return (
-            <div className="form-group">
+            <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
               <input type={obj.type} className="form-control form-control-lg" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
             </div>
@@ -68,7 +71,7 @@ function Form(prop) {
         }
         if(isSubmitted && isInvalid){
           return (
-            <div className="form-group">
+            <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
               <input type={obj.type} className="form-control form-control-lg is-invalid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
               <div class="invalid-feedback">Please provide a {obj.name}.</div>
@@ -77,7 +80,7 @@ function Form(prop) {
         } 
         if(isSubmitted && !isInvalid){
           return (
-            <div className="form-group">
+            <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
               <input type={obj.type} className="form-control form-control-lg is-valid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
             </div>
@@ -107,16 +110,20 @@ function Form(prop) {
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitted(true);
+    //setIsSubmitted(true);
+    isSubmitted = true;
 
     //error handling
     entryFormArray.map((obj) => {
       if(obj.input === '') {
         formValid(false);
-        setIsInvalid(true);
+        //setIsInvalid(true);
+        isInvalid = true;
+
       } else {
         formValid(true);
-        setIsInvalid(false);
+        //setIsInvalid(false);
+        isInvalid = false;
       }
     })
 
