@@ -99,7 +99,7 @@ function App() {
       // console.log(entriesObj);
       // The resulting array allows us to render the entries as an array
       // if (entriesObj === undefined) {
-        // entriesObj = {};
+      // entriesObj = {};
       // }
       let objectKeys = Object.keys(entriesObj);
       let entriesArray = objectKeys.map((key) => {
@@ -120,7 +120,19 @@ function App() {
     // console.log(Object.values(entries));
     // console.log(entries.userID);
     // if (entries[userID].length === 0) {
-    if (entries.length === 0) {
+
+    // The array of journal entries for this session's specific user
+    let thisEntryArray = [];
+    if (entries.length !== 0) {
+      for (let i = 0; i < entries.length; i++) {
+        let currentEntry = entries[i];
+        if (currentEntry.user === userID) {
+          thisEntryArray.push(currentEntry);
+        }
+      }
+    }
+
+    if (thisEntryArray.length === 0) {
       return (
         <div>
           <p>You have not created any journal entries! You can create an entry by visiting
@@ -129,13 +141,11 @@ function App() {
         </div>
       )
     } else {
-      // return <JournalLog {...routerProps} logs={entries[userID]} currentUser={user} />
-      return <JournalLog {...routerProps} logs={entries} currentUser={user} />
+      return <JournalLog {...routerProps} logs={thisEntryArray} currentUser={user} />
     }
   }
 
   const renderForm = (routerProps) => {
-    const userID = user.uid;
     return <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
     // return <Form {...routerProps} entries={entries[userID]} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
