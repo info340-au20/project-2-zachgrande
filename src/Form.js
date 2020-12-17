@@ -82,60 +82,52 @@ function Form(prop) {
     
     let allForm = entryFormArray.map((obj) => {
       //console.log(errorMessage);
-
+      let textBox = <div></div>;
       if (obj.id === "inputDescription"){
         if(!isSubmitted) {
-        return (
-          <div className="form-group" key="description">
-            <label htmlFor={obj.id}>{obj.label}</label>
-            <textarea className="form-control form-control-lg" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
-          </div>
+        textBox = (
+          <textarea className="form-control form-control-lg" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
         )
         }
         if(isSubmitted && isInvalid){
-          return (
-            <div className="form-group" key="description">
-              <label htmlFor={obj.id}>{obj.label}</label>
-              <textarea className="form-control form-control-lg is-invalid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
-              <div class="invalid-feedback">Please provide a {obj.name}.</div>
-            </div>
+          textBox = (
+          <div>
+            <textarea className="form-control form-control-lg is-invalid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+            <div class="invalid-feedback">Please provide a {obj.name}.</div>
+          </div>
           )
         } 
         if(isSubmitted && !isInvalid){
-          return (
-            <div className="form-group" key="description">
-                <label htmlFor={obj.id}>{obj.label}</label>
-                <textarea className="form-control form-control-lg is-valid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
-            </div>
+          textBox = (
+            <textarea className="form-control form-control-lg is-valid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
           )      
         }
       } else {
         if(!isSubmitted) {
-          return (
-            <div className="form-group" key={obj.name}>
-              <label htmlFor={obj.id}>{obj.label}</label>
-              <input type={obj.type} className="form-control form-control-lg" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
-            </div>
+          textBox = (
+            <input type={obj.type} className="form-control form-control-lg" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
           ) 
         }
         if(isSubmitted && isInvalid){
-          return (
-            <div className="form-group" key={obj.name}>
-              <label htmlFor={obj.id}>{obj.label}</label>
+          textBox = (
+            <div>
               <input type={obj.type} className="form-control form-control-lg is-invalid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
               <div class="invalid-feedback">Please provide a {obj.name}.</div>
             </div>
           )
         } 
         if(isSubmitted && !isInvalid){
-          return (
-            <div className="form-group" key={obj.name}>
-              <label htmlFor={obj.id}>{obj.label}</label>
-              <input type={obj.type} className="form-control form-control-lg is-valid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
-            </div>
+          textBox = (
+            <input type={obj.type} className="form-control form-control-lg is-valid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
           )      
         }
       }
+      return (
+        <div className="form-group" key="description">
+            <label htmlFor={obj.id}>{obj.label}</label>
+            {textBox}
+        </div>
+      )
     })
     console.log(entryFormArray);
 
