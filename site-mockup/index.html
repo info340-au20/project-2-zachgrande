@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="INFO 340 AA">
+    <meta name="description" content="Project 1: Draft">
+    <title>SongNotes</title>
+    <!-- Link to Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/tempicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class="page-header">
+        <h1>Welcome to SongNotes</h1>
+        <!--change in DOM-->
+        <nav>
+            <ul>
+                <!-- TODO: Adjust link to published index.html page -->
+                <li>
+                    <!--<a href="index.html"> <!-change to displaying character section-->
+                    <img class="icon home-page" role="button" src="img/logotransparent.png" alt="logo">
+                    <!--</a>-->
+                </li>
+                <li class="make-entry">
+                    <button class="btn btn-primary btn-lg">Make Entry</button>
+                    <!--<a href="landing.html">Make an Entry</a>-->
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- CALENDAR PAGE -->
+        <section id="calendarPage">
+            <div class="btn-group-sm d-flex justify-content-sm-center justify-content-lg-end" role="group" aria-label="viewing mode buttons">
+                <button class="btn btn-secondary album-btn">Album Covers</button>
+                <button class="btn btn-secondary color-btn">Mood Colors</button>
+            </div>
+            <div class="calendar" aria-label="calendar">
+                <div class="month container">
+                    <h2><span class="prev" aria-label="previous month button">&#10094;</span>October 2020<span class="next" aria-label="next month button">&#10095;</span></h2>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sun</th>
+                            <th scope="col">Mon</th>
+                            <th scope="col">Tues</th>
+                            <th scope="col">Wed</th>
+                            <th scope="col">Thur</th>
+                            <th scope="col">Fri</th>
+                            <th scope="col">Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="filled other-month happy album" role="img" aria-label="song album cover" id="2020-09-27" ><span class="highlight">27</span></td>
+                            <td class="filled other-month sad album" role="img" aria-label="song album cover" id="2020-09-28"><span class="highlight">28</span></td>
+                            <td class="filled other-month anxious album" role="img" aria-label="song album cover" id="2020-09-29"><span class="highlight">29</span></td>
+                            <td class="filled other-month happy album" role="img" aria-label="song album cover" id="2020-09-30"><span class="highlight">30</span></td>
+                            <td class="filled calm album" role="img" aria-label="song album cover" id="2020-10-01"><span class="highlight">1</span></td>
+                            <td class="filled sad album" role="img" aria-label="song album cover" id="2020-10-02"><span class="highlight">2</span></td>
+                            <td class="filled sad album" role="img" aria-label="song album cover" id="2020-10-03"><span class="highlight">3</span></td>
+                        </tr>
+                        <tr>
+                            <td class="filled happy album" role="img" aria-label="song album cover" id="2020-10-04"><span class="highlight">4</span></td>
+                            <td class="filled anxious album" role="img" aria-label="song album cover" id="2020-10-05"><span class="highlight">5</span></td>
+                            <td class="filled calm album" role="img" aria-label="song album cover" id="2020-10-06"><span class="highlight">6</span></td>
+                            <td class="filled happy album" role="img" aria-label="song album cover" id="2020-10-07"><span class="highlight">7</span></td>
+                            <td class="filled sad album" role="img" aria-label="song album cover" id="2020-10-08"><span class="highlight">8</span></td>
+                            <td class="filled calm album" role="img" aria-label="song album cover" id="2020-10-09"><span class="highlight">9</span></td>
+                            <td class="filled happy album" role="img" aria-label="song album cover" id="2020-10-10"><span class="highlight">10</span></td>
+                        </tr>
+                        <tr>
+                            <td class="filled calm album" role="img" aria-label="song album cover" id="2020-10-11"><span class="highlight">11</span></td>
+                            <td class="filled sad album" role="img" aria-label="song album cover" id="2020-10-12"><span class="highlight">12</span></td>
+                            <td class="filled anxious album" role="img" aria-label="song album cover" id="2020-10-13"><span class="highlight">13</span></td>
+                            <td class="filled anxious album" role="img" aria-label="song album cover" id="2020-10-14"><span class="highlight">14</span></td>
+                            <td class="filled calm album" role="img" aria-label="song album cover" id="2020-10-15"><span class="highlight">15</span></td>
+                            <td class="today" id="2020-10-16"><span class="highlight">16<span> Today</span></span></td>
+                            <td id="2020-10-17"><span class="highlight">17</span></td>
+                        </tr>
+                        <tr>
+                            <td id="2020-10-18"><span class="highlight">18</span></td>
+                            <td id="2020-10-19"><span class="highlight">19</span></td>
+                            <td id="2020-10-20"><span class="highlight">20</span></td>
+                            <td id="2020-10-21"><span class="highlight">21</span></td>
+                            <td id="2020-10-22"><span class="highlight">22</span></td>
+                            <td id="2020-10-23"><span class="highlight">23</span></td>
+                            <td id="2020-10-24"><span class="highlight">24</span></td>
+                        </tr>
+                        <tr>
+                            <td id="2020-10-25"><span class="highlight">25</span></td>
+                            <td id="2020-10-26"><span class="highlight">26</span></td>
+                            <td id="2020-10-27"><span class="highlight">27</span></td>
+                            <td id="2020-10-28"><span class="highlight">28</span></td>
+                            <td id="2020-10-29"><span class="highlight">29</span></td>
+                            <td id="2020-10-30"><span class="highlight">30</span></td>
+                            <td id="2020-10-31"><span class="highlight">31</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- LANDING PAGE -->
+        <section id="landingPage">
+            <form>
+                <div class="form-group">
+                    <label for="inputTitle">Post Title</label>
+                    <input type="text" class="form-control form-control-lg" id="inputTitle" aria-label="Entry Title" placeholder="What do you want to title this post?">
+                </div>
+                <div class="form-group">
+                    <label for="inputDate">Day</label>
+                    <input type="date" id="inputDate" class="form-control form-control-lg" aria-label="Date" required>
+                    <div id="dateFeedback" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBody">How was your day?</label>
+                    <textarea class="form-control" id="inputBody" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <p role="label">Today's Mood Rating</p>
+                    <!-- rebecca edited this part
+                <input type="range" class="form-control-range" id="formControlRange" min="1" max="10">
+                <small id="moodDescription" class="form-text text-muted">On a scale from 1-10, how are you feeling today?</small>
+                 -->
+                    <div class="mood-rating">
+                        <div aria-label="calm select" class="moodbtn"><img class="calmbtn" src="img/mood_buttons/calm.jpg" alt="calm"></div>
+                        <div aria-label="happy select" class="moodbtn"><img class="happybtn" src="img/mood_buttons/happy.jpg" alt="happy"></div>
+                        <div aria-label="anxious select" class="moodbtn"><img class="anxiousbtn" src="img/mood_buttons/anxious.jpg" alt="anxious"></div>
+                        <div aria-label="sad select" class="moodbtn"><img class="sadbtn" src="img/mood_buttons/sad.jpg" alt="sad"></div>
+                    </div>
+                    <div id="moodFeedback" class="invalid-feedback"></div>
+                </div>
+                <div class="form-group">
+                    <label for="songSearch">Search for Today's Song</label>
+                    <span class="glyphicon glyphicon-search"></span>
+                    <input class="form-control" type="text" id="songSearch" placeholder="Search" aria-label="Search">
+                </div>
+                <button class="btn btn-primary" id="submit">Done</button>
+                <!--add class .home-page when no errors in form-->
+            </form>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="aboutPage">
+            <div class="about-page">
+                <img class="aboutpagelogo " src="img/logotransparent.png " alt="black icon of an opened book with a white musical note">
+                <p> Sometimes it’s easier to express how you feel with a song.
+                </p>
+                <p>
+                    SongNotes is a home for your daily journal, for you to get down your thoughts, how you feel today, and pick a song that “just fits” your mood. SongNotes connects with Spotify to let pick from a vast library of tracks, out of your personal playlists.
+                </p>
+                <p>
+                    By the end of the month, we create a song calendar for you to track your mood, and when you like to hear certain songs.
+                </p>
+                <button class="btn btn-primary make-entry">Make your first note</button> <!--don't know why this button is not working despite make-entry class-->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-copyright text-center py-3"> &copy; INFO 340 AA -
+            <span role="button" class="about-us"> About Us</span>
+        </div>
+    </footer>
+
+    <!-- Load JavaScript libraries here -->
+    <script src="js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
+</body>
+
+</html>
