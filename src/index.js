@@ -18,25 +18,14 @@ import 'firebase/database';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// Old firebaseConfig
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCZyzL8yth7VmE8mOG1T75ztM0v3SAMzFg",
-//   authDomain: "info-340-project-2-6e95f.firebaseapp.com",
-//   projectId: "info-340-project-2-6e95f",
-//   storageBucket: "info-340-project-2-6e95f.appspot.com",
-//   messagingSenderId: "588622978497",
-//   appId: "1:588622978497:web:c8a160b8f8bfdede12a340",
-//   measurementId: "G-02TNKY9483"
-// };
-// New firebaseConfig
-var firebaseConfig = {
-  apiKey: "AIzaSyDLW7GAG9SkF5e9wsCfph8RpDtAK19HIWk",
-  authDomain: "info-340-project-2-final-2c408.firebaseapp.com",
-  databaseURL: "https://info-340-project-2-final-2c408-default-rtdb.firebaseio.com",
-  projectId: "info-340-project-2-final-2c408",
-  storageBucket: "info-340-project-2-final-2c408.appspot.com",
-  messagingSenderId: "680903552538",
-  appId: "1:680903552538:web:c6c514990b5b2967f1aba3"
+const firebaseConfig = {
+  apiKey: "AIzaSyCZyzL8yth7VmE8mOG1T75ztM0v3SAMzFg",
+  authDomain: "info-340-project-2-6e95f.firebaseapp.com",
+  projectId: "info-340-project-2-6e95f",
+  storageBucket: "info-340-project-2-6e95f.appspot.com",
+  messagingSenderId: "588622978497",
+  appId: "1:588622978497:web:c8a160b8f8bfdede12a340",
+  measurementId: "G-02TNKY9483"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
