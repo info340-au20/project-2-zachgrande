@@ -7,7 +7,7 @@ function Entry(prop) {
   let log = prop.log;
   const handleClick=() => {
     let redirectCopy = {...redirectTo};
-    redirectCopy = "/post/" + log.time;
+    redirectCopy = "/post/" + log.key;
     setRedirectTo(redirectCopy);
   }
 

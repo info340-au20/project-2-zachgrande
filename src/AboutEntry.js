@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 function AboutEntry(prop) {
   let entries = prop.entries;
   let urlParams = useParams();
-  let timeStamp = urlParams.timeStamp;
+  let entryKey = urlParams.entryKey;
   let entry = {};
   for (let i = 0; i < entries.length; i++) {
-    let thisTimeStamp = entries[i].time;
-    if (timeStamp = thisTimeStamp) {
+    let thisEntryKey = entries[i].key;
+    if (entryKey === thisEntryKey) {
       entry = entries[i];
     }
   }

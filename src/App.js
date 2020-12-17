@@ -244,7 +244,7 @@ function App() {
               <Route path="/create-entry" render={renderMoodSelect} />
               <Route path="/form" render={renderForm} />
               <Route path="/about-us" component={AboutPage} />
-              <Route path="/post/:timeStamp" render={renderAboutEntry} />
+              <Route path="/post/:entryKey" render={renderAboutEntry} />
               <Redirect to="/" />
             </Switch>
           </nav>
