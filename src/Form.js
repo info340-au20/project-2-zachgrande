@@ -1,17 +1,15 @@
 import fetchTrack from './Track.js';
 //import MoodSelect from './MoodSelect.js';
-import { useEffect, useState } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import { useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
 // import { Spinner } from 'reactstrap';
 
-// Similar code is in Form.js, moved here to ensure global variables update
 function Form(prop) {
   // Establish our variables from the prop
   const user = prop.currentUser;
   let entries = prop.entries;
-  let modifyEntries = prop.modifyEntries;
+  // let modifyEntries = prop.modifyEntries;
   let formValid = prop.formValid;
 
   let entryObj = {
@@ -27,36 +25,24 @@ function Form(prop) {
     {input: entryObj.inputDescription, err: "", id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
     {input: entryObj.inputSong, err: "", id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
   ]
-  //const [formState, setFormState] = useState(entryFormArray);
  
-  //base appearance of form without error checks  
+  // Base appearance of form without error checks  
   const [isSubmitted, setIsSubmitted] = useState(false);
-  //let isSubmitted = false;
   const [isInvalid, setIsInvalid] = useState("");
-  //let isInvalid = "";
-
-  //let validation = "";
   let errorMessage = "";
 
 
   function MakeForm() {
-    //const makeForm = () => {
     let handleInput = (event) => {
-      console.log(event);
       const inputValue = event.target.value;
       const inputName = event.target.id;
 
-      entryObj[inputName] = inputValue; 
-      //console.log(entryObj);
-    
-      //let validation = "";
-      //if (isSubmitted){
-        //let validation = "";
+      entryObj[inputName] = inputValue;
         if(!isSubmitted){
           event.target.classList = "form-control form-control-lg";
           errorMessage = "";
         } 
-        if(inputValue != "" && isSubmitted){
+        if(inputValue !== "" && isSubmitted){
           event.target.classList = "form-control form-control-lg is-valid";
           errorMessage = "";
         } 
@@ -64,9 +50,6 @@ function Form(prop) {
           event.target.classList = "form-control form-control-lg is-invalid";
           errorMessage = "Please provide a " + inputName.replace("input", "").toLowerCase() + ".";
         }
-        //event.target.classList.add(validation);
-        //classList = ""
-      //}
 
       entryFormArray = [
         {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
@@ -74,14 +57,9 @@ function Form(prop) {
         {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
         {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
       ]
-      //console.log(errorMessage);
-      //console.log(entryFormArray);
-      //MakeForm();
-  
     }
     
     let allForm = entryFormArray.map((obj) => {
-      //console.log(errorMessage);
       let textBox = <div></div>;
       if (obj.id === "inputDescription"){
         if(!isSubmitted) {
@@ -123,13 +101,12 @@ function Form(prop) {
         }
       }
       return (
-        <div className="form-group" key="description">
+        <div className="form-group" key={obj}>
             <label htmlFor={obj.id}>{obj.label}</label>
             {textBox}
         </div>
       )
     })
-    console.log(entryFormArray);
 
     return (
       <div>
@@ -137,34 +114,23 @@ function Form(prop) {
       </div>
     )
   }
-
-  
-  
-
-
-
   
   let isDisabled = '';
   let error = false;
-
 
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
     setIsSubmitted(true);
-    //isSubmitted = true;
 
-    //error handling
+    // Error handling
     entryFormArray.map((obj) => {
       if(obj.input === '') {
         formValid(false);
         setIsInvalid(true);
-        //isInvalid = true;
-
       } else {
         formValid(true);
         setIsInvalid(false);
-        //isInvalid = false;
       }
     })
 
@@ -184,7 +150,6 @@ function Form(prop) {
       searchResults = searchResults.results[0];
 
       // Select the song elements to go in the entry
-      // [artwork URL, artist name, song title]
       let songEntry = [searchResults.artworkUrl100, searchResults.artistName, searchResults.trackName];
 
       const newEntry = {
@@ -198,34 +163,14 @@ function Form(prop) {
         time: firebase.database.ServerValue.TIMESTAMP,
         user: user.uid
       }
-      console.log(newEntry);
 
-      // Append an additional entry
+      // Append an additional entry to the local state
       newEntriesArray.push(newEntry);
-      // newEntriesArray.push({
-      //   postTitle: userTitle,
-      //   date: userDate,
-      //   dayDescription: userBody,
-      //   moodRating: moodEntry,
-      //   artwork: songEntry[0],
-      //   artist: songEntry[1],
-      //   songTitle: songEntry[2]
-      // });
 
       // ADD A NEW ENTRY TO THE DATABASE
       // Get a reference to the database child
       const entryRef = firebase.database().ref('entries'); // change URL to person's user ID
       entryRef.push(newEntry);
-      // console.log(user);
-
-      // Replace the old state
-      // BRING BACK THE NEXT LINE -- ZACH
-      // modifyEntries(newEntriesArray);
-      
-      // prop.completionAction();
-      // <Route exact path="/" />
-      // console.log(prop.router);
-      // prop.routerProps.history.push('/');
     }
 
     // The final step of our form, ensure nothing is computed until fetch completes

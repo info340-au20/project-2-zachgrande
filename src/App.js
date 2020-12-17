@@ -184,8 +184,8 @@ function App() {
     }
     return (
       <div>
-        <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} mood={moodEntry} formValid={handleFormValidation}/>
-        {/*<p><Link to="/">go to home</Link></p>*/}
+        {/* <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} mood={moodEntry} formValid={handleFormValidation}/> */}
+        <Form {...routerProps} entries={entries} currentUser={user} completionAction={sendUserHome} mood={moodEntry} formValid={handleFormValidation}/>
         <FormErrorCheck /> 
       </div>
     )
