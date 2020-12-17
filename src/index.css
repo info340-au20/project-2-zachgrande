@@ -165,7 +165,7 @@ footer {
 
 .song-title {
     margin: 1rem;
-    font-style: bold;
+    font-weight: bold;
 }
 
 .song {
@@ -173,6 +173,7 @@ footer {
 }
 
 .artist-title {
+    font-weight: bold;
     margin: 1rem;
 }
 
