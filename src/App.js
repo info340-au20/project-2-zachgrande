@@ -6,7 +6,7 @@ import AboutPage from './AboutUs.js';
 import Form from './Form.js';
 import JournalLog from './JournalLog.js';
 import MoodSelect from './MoodSelect.js';
-import Expand from './Expand.js'
+import AboutEntry from './AboutEntry.js';
 //import { Button } from 'reactstrap';
 import { Spinner } from 'reactstrap';
 import firebase from 'firebase/app';
@@ -192,6 +192,11 @@ function App() {
     // return <Form {...routerProps} entries={entries[userID]} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
+  const renderAboutEntry = routerProps => {
+    return (
+      <AboutEntry {...routerProps} entries={entries} />
+    )
+  }
 
 
   const sendUserHome = () => {
@@ -240,7 +245,7 @@ function App() {
               <Route path="/create-entry" render={renderMoodSelect} />
               <Route path="/form" render={renderForm} />
               <Route path="/about-us" component={AboutPage} />
-              <Route path="/post/:timeStamp" component={Expand} />
+              <Route path="/post/:timeStamp" render={renderAboutEntry} />
               <Redirect to="/" />
             </Switch>
           </nav>

@@ -1,16 +1,12 @@
-// import { Expand } from './Expand';
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
 function Entry(prop) {
   const [redirectTo, setRedirectTo] = useState();
   let log = prop.log;
-  // console.log(log);
   const handleClick=() => {
-    // console.log("you clicked on,", log.postTitle);
     let redirectCopy = {...redirectTo};
     redirectCopy = "/post/" + log.time;
-    console.log(redirectCopy);
     setRedirectTo(redirectCopy);
   }
 
@@ -27,8 +23,6 @@ function Entry(prop) {
         <h2 className="entry-title">{log.postTitle}</h2>
         <p className="date">{log.date}</p>
         {/* <p>{log.dayDescription}</p> */}
-        {/* <Test></Test> */}
-
       </div>
     </div>
   )
