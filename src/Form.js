@@ -169,7 +169,7 @@ function Form(prop) {
 
       // ADD A NEW ENTRY TO THE DATABASE
       // Get a reference to the database child
-      const entryRef = firebase.database().ref('entries'); // change URL to person's user ID
+      const entryRef = firebase.database().ref('entries');
       entryRef.push(newEntry);
     }
 

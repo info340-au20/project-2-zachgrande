@@ -109,7 +109,6 @@ function App() {
         singleEntryObj.key = key // IMPORTANT
         return singleEntryObj;
       })
-      // console.log(entriesArray);
       modifyEntries(entriesArray);
     })
   }, [])
