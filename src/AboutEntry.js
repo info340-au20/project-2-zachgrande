@@ -12,23 +12,6 @@ function AboutEntry(prop) {
     }
   }
   return (
-    // Jerray delete all this commented stuff!! 
-
-    // <div className="row">
-    //   <div className="card mb-4">
-    //     <div className={"card-header color " + entry.moodRating}>
-    //       <div className="col">
-    //         <img className="today album-test" id="about-entry-img" src={entry.artwork} alt="album cover" />
-    //       </div>
-    //     </div>
-    //     <div>
-    //       <h2 className="entry-title">{entry.postTitle}</h2>
-    //       <p className="date">{entry.date}</p>
-    //       <p>{entry.dayDescription}</p>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className="container">
       <div className="card mb-4">
         <div className={"card-header color " + entry.moodRating}>

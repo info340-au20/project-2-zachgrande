@@ -101,7 +101,6 @@ footer {
 }
 
 .moodbtn img {
-    /*display: inline-block;*/
     height: 2rem;
     width: 2rem;
 }
@@ -187,7 +186,6 @@ footer {
 }
 
 .description {
-    /* display: inline-block; */
     margin: 1rem 2rem;
 }
 
@@ -195,18 +193,6 @@ footer {
     height: 8rem;
     width: 8rem;
 }
-
-
-
-
-/* .trash-can {
-    height: 2rem;
-    width: 2rem;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-} */
-
 
 
 /*About page*/
