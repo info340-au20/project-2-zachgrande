@@ -33,9 +33,9 @@ function Form(prop) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   //let isSubmitted = false;
   const [isValid, setIsValid] = useState("");
-  //let isValid = true;
+  //let isValid = "";
 
-  //let validation = "";
+  let validation = "";
 
   function MakeForm() {
     //const makeForm = () => {
@@ -46,18 +46,18 @@ function Form(prop) {
 
       entryObj[inputName] = inputValue; 
       console.log(entryObj);
-
+    
       //let validation = "";
-      if (isSubmitted){
+      /*if (isSubmitted){
         //let validation = "";
         if(entryObj.inputValue != ''){
-          setIsValid("is-invalid");
+          isValid = "is-invalid";
         } else {
-          setIsValid("is-valid");
+          isValid = "is-valid";
         }
         //event.target.classList.add(validation);
         //classList = ""
-      }
+      }*/
 
       entryFormArray = [
         {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
@@ -76,7 +76,7 @@ function Form(prop) {
         return (
           <div className="form-group" key="description">
             <label htmlFor={obj.id}>{obj.label}</label>
-            <textarea className={"form-control form-control-lg" + isValid} id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+            <textarea className={"form-control form-control-lg" + validation} id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
           </div>
         )
         //}
@@ -99,15 +99,15 @@ function Form(prop) {
         } */
 
       } else {
-        //if(!isSubmitted) {
+        if(!isSubmitted) {
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
-              <input type={obj.type} className={"form-control form-control-lg" + isValid} id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
+              <input type={obj.type} className={"form-control form-control-lg" + validation} id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
             </div>
           ) 
-        //}
-        /*if(isSubmitted && isValid){
+        }
+        if(isSubmitted && isValid){
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
@@ -123,7 +123,7 @@ function Form(prop) {
               <input type={obj.type} className="form-control form-control-lg is-valid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
             </div>
           )      
-        } */
+        } 
       }
     })
     console.log(entryFormArray);
@@ -155,12 +155,12 @@ function Form(prop) {
     entryFormArray.map((obj) => {
       if(obj.input === '') {
         formValid(false);
-        //setIsValid(true);
+        setIsValid(true);
         //isValid = true;
 
       } else {
         formValid(true);
-        //setIsValid(false);
+        setIsValid(false);
         //isValid = false;
       }
     })
