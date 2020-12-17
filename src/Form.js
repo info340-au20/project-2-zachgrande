@@ -20,30 +20,48 @@ function Form(prop) {
     inputDescription: '',
     inputSong: '',
   }
+  //let hasInput = false
   let entryFormArray = [
     {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
-    {input: entryObj.inputDate, id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
+    {input: entryObj.inputDate,  id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
     {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
     {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
   ]
   //const [formState, setFormState] = useState(entryFormArray);
  
   //base appearance of form without error checks  
-  //const [isSubmitted, setIsSubmitted] = useState(false);
-  let isSubmitted = false;
-  //const [isInvalid, setIsInvalid] = useState(true);
-  let isInvalid = true;
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  //let isSubmitted = false;
+  const [isValid, setIsValid] = useState("");
+  //let isValid = true;
+
+  //let validation = "";
 
   function MakeForm() {
     //const makeForm = () => {
     let handleInput = (event) => {
+      console.log(event);
       const inputValue = event.target.value;
       const inputName = event.target.id;
+
       entryObj[inputName] = inputValue; 
       console.log(entryObj);
+
+      //let validation = "";
+      if (isSubmitted){
+        //let validation = "";
+        if(entryObj.inputValue != ''){
+          setIsValid("is-invalid");
+        } else {
+          setIsValid("is-valid");
+        }
+        //event.target.classList.add(validation);
+        //classList = ""
+      }
+
       entryFormArray = [
         {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
-        {input: entryObj.inputDate, id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
+        {input: entryObj.inputDate,  id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
         {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
         {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
       ]
@@ -54,22 +72,42 @@ function Form(prop) {
     
     let allForm = entryFormArray.map((obj) => {
       if (obj.id === "inputDescription"){
+        //if(!isSubmitted) {
         return (
           <div className="form-group" key="description">
             <label htmlFor={obj.id}>{obj.label}</label>
-            <textarea className="form-control form-control-lg" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+            <textarea className={"form-control form-control-lg" + isValid} id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
           </div>
         )
+        //}
+        /*if(isSubmitted && obj.validation===false){
+          return (
+            <div className="form-group" key="description">
+            <label htmlFor={obj.id}>{obj.label}</label>
+            <textarea className="form-control form-control-lg is-invalid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+            <div class="invalid-feedback">Please provide a {obj.name}.</div>
+          </div>
+          )
+        } 
+        if(isSubmitted && obj.validation===true){
+          return (
+            <div className="form-group" key="description">
+            <label htmlFor={obj.id}>{obj.label}</label>
+            <textarea className="form-control form-control-lg is-valid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+          </div>
+          )      
+        } */
+
       } else {
-        if(!isSubmitted) {
+        //if(!isSubmitted) {
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
-              <input type={obj.type} className="form-control form-control-lg" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
+              <input type={obj.type} className={"form-control form-control-lg" + isValid} id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
             </div>
           ) 
-        }
-        if(isSubmitted && isInvalid){
+        //}
+        /*if(isSubmitted && isValid){
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
@@ -78,14 +116,14 @@ function Form(prop) {
             </div>
           )
         } 
-        if(isSubmitted && !isInvalid){
+        if(isSubmitted && !isValid){
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
               <input type={obj.type} className="form-control form-control-lg is-valid" id={obj.id} aria-label={obj.aria} placeholder={obj.placeholder} onChange={handleInput} />
             </div>
           )      
-        } 
+        } */
       }
     })
     console.log(entryFormArray);
@@ -110,20 +148,20 @@ function Form(prop) {
   // When a user submits the form, modify the state
   let handleSubmit = (event) => {
     event.preventDefault();
-    //setIsSubmitted(true);
-    isSubmitted = true;
+    setIsSubmitted(true);
+    //isSubmitted = true;
 
     //error handling
     entryFormArray.map((obj) => {
       if(obj.input === '') {
         formValid(false);
-        //setIsInvalid(true);
-        isInvalid = true;
+        //setIsValid(true);
+        //isValid = true;
 
       } else {
         formValid(true);
-        //setIsInvalid(false);
-        isInvalid = false;
+        //setIsValid(false);
+        //isValid = false;
       }
     })
 
