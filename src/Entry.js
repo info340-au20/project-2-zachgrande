@@ -22,7 +22,7 @@ function Entry(prop) {
         <img className="today album-test" src={log.artwork} alt="album cover" />
         <h2 className="entry-title">{log.postTitle}</h2>
         <p className="date">{log.date}</p>
-        {/* <p>{log.dayDescription}</p> */}
+        <img className="trash-can m-1" src="./img/trashcan.png" alt="trash can" />
       </div>
     </div>
   )

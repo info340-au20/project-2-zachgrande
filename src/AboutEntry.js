@@ -14,7 +14,7 @@ function AboutEntry(prop) {
   return (
     <div className="card mb-4">
       <div className={"card-header color " + entry.moodRating}>
-        <img className="today album-test" src={entry.artwork} alt="album cover" />
+        <img className="today album-test" id="about-entry-img" src={entry.artwork} alt="album cover" />
         <h2 className="entry-title">{entry.postTitle}</h2>
         <p className="date">{entry.date}</p>
         <p>{entry.dayDescription}</p>

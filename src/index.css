@@ -162,6 +162,18 @@ footer {
     margin: 1rem 1rem;
 }
 
+#about-entry-img {
+    height: 7rem;
+    width: 7rem;
+}
+
+.trash-can {
+    height: 2rem;
+    width: 2rem;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
 
 /*About page*/
 
