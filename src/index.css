@@ -147,14 +147,16 @@ footer {
 }
 
 .entry-title {
+    font-size: 2.5rem;
+    font-family: 'Roboto Condensed', sans-serif;    
     display: inline-block;
-    margin: 1rem 1rem;
+    margin: 1rem rem;
     border-radius: 25px;
 }
 
 .date {
     display: inline-block;
-    margin: 1rem 1rem;
+    margin: 1rem 2rem;
 }
 
 .expand {
@@ -162,18 +164,50 @@ footer {
     margin: 1rem 1rem;
 }
 
-#about-entry-img {
-    height: 7rem;
-    width: 7rem;
+.song-title {
+    margin: 1rem;
+    font-style: bold;
 }
 
-.trash-can {
+.song {
+    margin: 1rem;
+}
+
+.artist-title {
+    margin: 1rem;
+}
+
+.artist {
+    margin: 1rem;
+}
+
+.description-title{
+    display: inline-block;
+    margin: 1rem 2rem;
+}
+
+.description {
+    /* display: inline-block; */
+    margin: 1rem 2rem;
+}
+
+#about-entry-img {
+    height: 8rem;
+    width: 8rem;
+}
+
+
+
+
+/* .trash-can {
     height: 2rem;
     width: 2rem;
     right: 0;
     bottom: 0;
     position: absolute;
-}
+} */
+
+
 
 /*About page*/
 
