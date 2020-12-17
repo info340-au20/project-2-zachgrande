@@ -22,20 +22,22 @@ function Form(prop) {
   }
   //let hasInput = false
   let entryFormArray = [
-    {input: entryObj.inputTitle, id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
-    {input: entryObj.inputDate,  id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
-    {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
-    {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
+    {input: entryObj.inputTitle, err: "",id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
+    {input: entryObj.inputDate,  err: "", id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
+    {input: entryObj.inputDescription, err: "", id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
+    {input: entryObj.inputSong, err: "", id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
   ]
   //const [formState, setFormState] = useState(entryFormArray);
  
   //base appearance of form without error checks  
   const [isSubmitted, setIsSubmitted] = useState(false);
   //let isSubmitted = false;
-  const [isValid, setIsValid] = useState("");
-  //let isValid = "";
+  const [isInvalid, setIsInvalid] = useState("");
+  //let isInvalid = "";
 
   //let validation = "";
+  let errorMessage = "";
+
 
   function MakeForm() {
     //const makeForm = () => {
@@ -50,12 +52,17 @@ function Form(prop) {
       //let validation = "";
       //if (isSubmitted){
         //let validation = "";
-
+        if(!isSubmitted){
+          event.target.classList = "form-control form-control-lg";
+          errorMessage = "";
+        } 
         if(inputValue != "" && isSubmitted){
           event.target.classList = "form-control form-control-lg is-valid";
+          errorMessage = "";
         } 
         if (inputValue === "" && isSubmitted){
           event.target.classList = "form-control form-control-lg is-invalid";
+          errorMessage = "Please provide a " + inputName.replace("input", "").toLowerCase() + ".";
         }
         //event.target.classList.add(validation);
         //classList = ""
@@ -67,19 +74,41 @@ function Form(prop) {
         {input: entryObj.inputDescription, id:"inputDescription", name: "description", type: "text", label: "How was your day?", aria: "Day Description", placeholder: "mm/dd/yyyy"},
         {input: entryObj.inputSong, id:"inputSong", name: "song",type: "text", label: "Search for Today's Song", aria: "Song Search", placeholder: "Search"},
       ]
+      //console.log(errorMessage);
       //console.log(entryFormArray);
       //MakeForm();
   
     }
     
     let allForm = entryFormArray.map((obj) => {
+      //console.log(errorMessage);
+
       if (obj.id === "inputDescription"){
+        if(!isSubmitted) {
         return (
           <div className="form-group" key="description">
             <label htmlFor={obj.id}>{obj.label}</label>
             <textarea className="form-control form-control-lg" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
           </div>
         )
+        }
+        if(isSubmitted && isInvalid){
+          return (
+            <div className="form-group" key="description">
+              <label htmlFor={obj.id}>{obj.label}</label>
+              <textarea className="form-control form-control-lg is-invalid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+              <div class="invalid-feedback">Please provide a {obj.name}.</div>
+            </div>
+          )
+        } 
+        if(isSubmitted && !isInvalid){
+          return (
+            <div className="form-group" key="description">
+                <label htmlFor={obj.id}>{obj.label}</label>
+                <textarea className="form-control form-control-lg is-valid" id={obj.id} rows="3" aria-label={obj.aria} onChange={handleInput}></textarea>
+            </div>
+          )      
+        }
       } else {
         if(!isSubmitted) {
           return (
@@ -89,7 +118,7 @@ function Form(prop) {
             </div>
           ) 
         }
-        if(isSubmitted && isValid){
+        if(isSubmitted && isInvalid){
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
@@ -98,7 +127,7 @@ function Form(prop) {
             </div>
           )
         } 
-        if(isSubmitted && !isValid){
+        if(isSubmitted && !isInvalid){
           return (
             <div className="form-group" key={obj.name}>
               <label htmlFor={obj.id}>{obj.label}</label>
@@ -137,13 +166,13 @@ function Form(prop) {
     entryFormArray.map((obj) => {
       if(obj.input === '') {
         formValid(false);
-        setIsValid(true);
-        //isValid = true;
+        setIsInvalid(true);
+        //isInvalid = true;
 
       } else {
         formValid(true);
-        setIsValid(false);
-        //isValid = false;
+        setIsInvalid(false);
+        //isInvalid = false;
       }
     })
 
