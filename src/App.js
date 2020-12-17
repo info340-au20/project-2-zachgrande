@@ -1,4 +1,3 @@
-//import src from '*.avif';
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
 import NavigationBar from './NavigationBar.js';
@@ -7,7 +6,6 @@ import Form from './Form.js';
 import JournalLog from './JournalLog.js';
 import MoodSelect from './MoodSelect.js';
 import AboutEntry from './AboutEntry.js';
-//import { Button } from 'reactstrap';
 import { Spinner } from 'reactstrap';
 import firebase from 'firebase/app';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -38,45 +36,25 @@ function App() {
   // - a date
   // - a description
   // - a mood rating
-  // - a song
-  // [
-  // {one entry},
-  // {another entry}
-  // ]
-
-  // [
-  // {user A: [{entry}, {entry}]},
-  // {user B: [{entry}, {entry}]}
-  // ]
-  // const [entries, modifyEntries] = useState({});
+  // - a song (artwork, artist name, song title)
+  // - a time stamp
+  // - a user ID (who posted it)
   const [entries, modifyEntries] = useState([]);
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) => {
-      // console.log("Logged in as " + firebaseUser.displayName);
       setUser(firebaseUser);
-      // const userID = firebaseUser.uid;
-      // If our state does NOT contain data for this user
-      // if (!Object.keys(entries).includes(userID)) {
-      // Then make a new key for our user
-      // console.log("Making a new user!");
-      // entries[userID] = [];
-      // }
-      // console.log("Here is our state on load:");
-      // console.log(entries);
       setIsLoading(false);
     })
 
     return function cleanup() {
       authUnregisterFunction();
     }
-    // }, []) // only run on first load
   })
 
   const handleSignOut = () => {
-    // setErrorMessage(null);
     firebase.auth().signOut();
   }
 
@@ -87,22 +65,13 @@ function App() {
   useEffect(() => {
     const entryRef = firebase.database().ref('entries');
     entryRef.on('value', (snapshot) => {
+      const entriesObj = snapshot.val(); // convert to Javascript value
       // If our entries array is empty, then we can't iterate over empty keys
       // This conditional will ensure we skip the following if there are no entries
-      // console.log(entries);
-      const entriesObj = snapshot.val(); // convert to Javascript value
-      // if (entries.length === 0) {
       if (entriesObj === null) {
         modifyEntries([]);
         return null;
       }
-      // const entriesObj = snapshot.val(); // convert to Javascript value
-      // console.log("Value of database has changed");
-      // console.log(entriesObj);
-      // The resulting array allows us to render the entries as an array
-      // if (entriesObj === undefined) {
-      // entriesObj = {};
-      // }
       let objectKeys = Object.keys(entriesObj);
       let entriesArray = objectKeys.map((key) => {
         let singleEntryObj = entriesObj[key];
@@ -115,12 +84,6 @@ function App() {
 
   const renderJournalLog = (routerProps) => {
     const userID = user.uid;
-    // console.log("We're trying to find the journal entry length");
-    // console.log(userID);
-    // console.log(entries[userID]);
-    // console.log(Object.values(entries));
-    // console.log(entries.userID);
-    // if (entries[userID].length === 0) {
 
     // The array of journal entries for this session's specific user
     let thisEntryArray = [];
@@ -146,7 +109,7 @@ function App() {
     }
   }
 
-  //pass mood from MoodSelect
+  // Pass mood from MoodSelect
   const [moodEntry, setMoodEntry] = useState();
   const handleMoodInput = (e) => {
     setMoodEntry(e);
@@ -183,12 +146,10 @@ function App() {
     }
     return (
       <div>
-        {/* <Form {...routerProps} entries={entries} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} mood={moodEntry} formValid={handleFormValidation}/> */}
         <Form {...routerProps} entries={entries} currentUser={user} completionAction={sendUserHome} mood={moodEntry} formValid={handleFormValidation}/>
         <FormErrorCheck /> 
       </div>
     )
-    // return <Form {...routerProps} entries={entries[userID]} currentUser={user} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
   const renderAboutEntry = routerProps => {
@@ -200,7 +161,6 @@ function App() {
 
   const sendUserHome = () => {
     return <Redirect to="/" />
-    // return <Form {...routerProps} entries={entries} modifyEntries={handleChange} completionAction={sendUserHome} />
   }
 
   if (isLoading) {
@@ -227,7 +187,6 @@ function App() {
         <header className="page-header">
           <h1><Link to="/" id='title'>SongNotes</Link></h1>
 
-          {/* Logout Button */}
           {user &&
             <button className="btn btn-secondary signOutBtn" onClick={handleSignOut}>
               Log Out {user.displayName}

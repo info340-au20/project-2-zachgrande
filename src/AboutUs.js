@@ -14,11 +14,10 @@ function AboutPage() {
         <p>
           By the end of the month, we create a song calendar for you to track your mood, and when you like to hear certain songs.
           </p>
-        <button className="btn btn-secondary"> {/* need to implement an onClick here*/}
+        <button className="btn btn-secondary">
           <NavLink exact to="/create-entry" className="nav-link-1" activeClassName={"activeLink"} id="AU-link-button">
             Make your first note
           </NavLink>
-
         </button>
       </div>
     </section>

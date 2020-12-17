@@ -1,15 +1,12 @@
 import fetchTrack from './Track.js';
-//import MoodSelect from './MoodSelect.js';
 import { useState } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
-// import { Spinner } from 'reactstrap';
 
 function Form(prop) {
   // Establish our variables from the prop
   const user = prop.currentUser;
   let entries = prop.entries;
-  // let modifyEntries = prop.modifyEntries;
   let formValid = prop.formValid;
 
   let entryObj = {
@@ -18,7 +15,6 @@ function Form(prop) {
     inputDescription: "",
     inputSong: "",
   }
-  //let hasInput = false
   let entryFormArray = [
     {input: entryObj.inputTitle, err: "",id:"inputTitle", name: "title", type: "text", label: "Post Title", aria: "Entry Title", placeholder: "What do you want to title this post?"},
     {input: entryObj.inputDate,  err: "", id:"inputDate", name: "date", type: "date", label: "Day", aria: "Date"},
@@ -133,7 +129,6 @@ function Form(prop) {
         setIsInvalid(false);
       }
     })
-
 
     let newEntriesArray = [];
 

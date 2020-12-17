@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 function MoodSelect(props) {
-    //let currentData = props.currentData;
     let moodEntry = props.moodEntry;
     let moodOptions = [
       { id: 'calm', selected: false },
@@ -13,12 +12,9 @@ function MoodSelect(props) {
     const [moodInput, setMoodInput] = useState();
     const handleClick = (event) => {
       let mood = event.currentTarget.classList.value;
-      //event.currentTarget.src = "img/mood_buttons/" + mood + "_clicked" + ".jpg";
-      //event.currentTarget.alt = mood + "selected"; 
       setMoodInput(mood);
     }
     moodEntry(moodInput); //passes moodInput to Form
-
   
     let selectText = "";
     let clickText = "";

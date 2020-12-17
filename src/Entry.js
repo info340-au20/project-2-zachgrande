@@ -23,7 +23,6 @@ function Entry(prop) {
   }
 
   return (
-    // <div className="card clickable mb-4" onClick={handleClick}>
     <div className="card mb-4">
       <div className={"card-header color " + log.moodRating}>
         <img className="today album-test" src={log.artwork} alt="album cover" />
@@ -31,7 +30,6 @@ function Entry(prop) {
         <p className="date">{log.date}</p>
         <button className="btn-primary" onClick={handleClick}>Expand</button>
         <button className="btn-secondary" onClick={handleDeletion}>Delete Post</button>
-        {/* <img className="trash-can clickable m-1" src="./img/trashcan.png" alt="trash can" onClick={handleDeletion} /> */}
       </div>
     </div>
   )

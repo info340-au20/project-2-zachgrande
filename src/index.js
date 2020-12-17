@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import { Router } from 'react-router-dom';
 import history from './history.js';
-// import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
-// import Firebase, {FirebaseContext} from 'firebase/app';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -31,15 +29,11 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
-
 
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>
-      {/* <FirebaseContext.Provider value={new Firebase()}> */}
       <App />
-      {/* </FirebaseContext.Provider> */}
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
